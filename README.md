@@ -7,6 +7,9 @@
 ## **Depedency**
 - Soon
 
+## **How to play**
+- TBA
+
 ## **UML Class:**
 - Soon
 
