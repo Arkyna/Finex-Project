@@ -1,5 +1,6 @@
 import pygame as pgm
 from enemy import Enemy
+import math
 
 #initialisasi
 pgm.init()
