@@ -1,5 +1,5 @@
 import pygame as pgm
-from enemy import Enemy
+from bin.enemy import Enemy
 
 #initialisasi
 pgm.init()
