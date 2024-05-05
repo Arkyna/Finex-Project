@@ -2,6 +2,7 @@ import pygame as pgm
 import json
 from bin.enemy import Enemy
 from bin.world import World
+from bin.tower import Tower
 
 #initialisasi
 pgm.init()
@@ -24,6 +25,9 @@ pgm.display.set_caption("TDEFENSE")
 #map
 map_image = pgm.image.load('assets\images\map\level_1.png').convert_alpha()
 
+#individual tower image for mouse cursor
+cursor_tower = pgm.image.load('assets\images\towers\tower1.png').convert_alpha()
+
 #enemies
 enemy_image = pgm.image.load('assets\images\monsters\enemy1.png').convert_alpha()
 
@@ -37,6 +41,7 @@ world.process_data()
 
 #creating groups
 enemy_groups = pgm.sprite.Group()
+tower_groups = pgm.sprite.Group()
 
 enemy = Enemy(world.waypoints, enemy_image)
 enemy_groups.add(enemy)
@@ -63,6 +68,7 @@ while run:
 
     #draw groups
     enemy_groups.draw(screen)
+    tower_groups.draw(screen)
 
     #event handler
     for event in pgm.event.get():
@@ -70,6 +76,12 @@ while run:
         if event.type == pgm.QUIT:
             run = False
 
+    #mouse click
+    if event.type == pgm.MOUSEBUTTONDOWN and event.button == 1:
+        mouse_pos = pgm.mouse.get_pos()
+        tower = Tower(cursor_tower, mouse_pos)
+        tower_groups.add(tower)
+        
     #update display
     pgm.display.flip()
 
