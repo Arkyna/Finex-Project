@@ -3,6 +3,7 @@ import json
 from bin import globalvar as val
 from bin.enemy import Enemy
 from bin.world import World
+from bin.button import Button
 from bin.tower import Tower
 
 #initialisasi
@@ -24,6 +25,10 @@ cursor_tower = pgm.image.load(r'assets\images\towers\tower1.png').convert_alpha(
 
 #enemies
 enemy_image = pgm.image.load(r'assets\images\monsters\enemy1.png').convert_alpha()
+
+# buttons
+buy_turret_image = pgm.image.load(r'assets\images\button\buy_turret.png').convert_alpha()
+cancel_button_image = pgm.image.load(r'assets\images\button\cancel_turret.png').convert_alpha()
 
 #load json data for level
 with open('bin\levels\level1.tmj') as file:
@@ -59,6 +64,10 @@ tower_groups = pgm.sprite.Group()
 
 enemy = Enemy(world.waypoints, enemy_image)
 enemy_groups.add(enemy)
+
+# create button
+turret_button = Button(val.SCREEN_WIDTH + 30, 120, buy_turret_image)
+cancel_button = Button(val.SCREEN_WIDTH + 30, 180, cancel_button_image)
 
 #game loop
 run = True
