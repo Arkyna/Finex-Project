@@ -6,13 +6,13 @@ from bin.world import World
 from bin.button import Button
 from bin.tower import Tower
 
-#initialisasi
+# initialisasi
 pgm.init()
 
-#create clock
+# create clock
 clock = pgm.time.Clock()
 
-#creating window game
+# creating window game
 screen = pgm.display.set_mode((val.SCREEN_WIDTH + val.SIDE_PANEL, val.SCREEN_HEIGHT))
 pgm.display.set_caption(val.GAME_NAME)
 
@@ -21,11 +21,11 @@ pgm.display.set_caption(val.GAME_NAME)
 placing_tower = False
 
 
-#Load image
-#map
+# Load images
+# map
 map_image = pgm.image.load(r'assets\images\map\level1.png').convert_alpha()
 
-#individual tower image for mouse cursor
+# individual tower image for mouse cursor
 cursor_tower = pgm.image.load(r'assets\images\towers\tower1.png').convert_alpha()
 
 #enemies
@@ -35,10 +35,10 @@ enemy_image = pgm.image.load(r'assets\images\monsters\enemy2.png').convert_alpha
 buy_tower_image = pgm.image.load(r'assets\images\buttons\buy_button.png').convert_alpha()
 cancel_button_image = pgm.image.load(r'assets\images\buttons\cancel_button.png').convert_alpha()
 
-#sidebar 
+# sidebar 
 sidebar_image = pgm.image.load(r'assets\images\gui\sidepanel.png').convert_alpha()
 
-#load json data for level
+# load json data for level
 with open('bin\levels\level1.tmj') as file:
     world_data = json.load(file)
 
@@ -46,31 +46,31 @@ pgm.mixer.music.load(r"assets\audios\bgm2.mp3")
 pgm.mixer.music.play()
 
 
-#creating tower
+# creating tower
 def create_tower(mouse_pos):
     mouse_tile_x = mouse_pos[0] // val.TILE_SIZE
     mouse_tile_y = mouse_pos[1] // val.TILE_SIZE
 
-    #calculating squential numbers of tile on level
+    # calculating squential numbers of tile on level
     mouse_tile_num = (mouse_tile_y * val.COLS) + mouse_tile_x
 
-    #checking tile if place able
+    # checking tile if place able
     if world.tile_map[mouse_tile_num] == 74:
-        #checking the place is already occupied by tower
+        # checking the place is already occupied by tower
         space_is_free = True
         for tower in tower_groups:
             if (mouse_tile_x, mouse_tile_y) == (tower.tile_x, tower.tile_y):
                 space_is_free = False
-        #if free then place tower
+        # if free then place tower
         if space_is_free == True:
             new_tower = Tower(cursor_tower, mouse_tile_x, mouse_tile_y)
             tower_groups.add(new_tower)
 
-#create world
+# create world
 world = World(world_data, map_image)
 world.process_data()
 
-#creating groups
+# creating groups
 enemy_groups = pgm.sprite.Group()
 tower_groups = pgm.sprite.Group()
 
@@ -82,7 +82,7 @@ enemy_groups.add(enemy)
 tower_button = Button(val.SCREEN_WIDTH + 30, 120, buy_tower_image, True)
 cancel_button = Button(val.SCREEN_WIDTH + 30, 180, cancel_button_image, True)
 
-#game loop
+# game loop
 run = True
 while run:
 
