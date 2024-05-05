@@ -1,5 +1,6 @@
 import pygame as pgm
 import json
+from bin import globalvar as val
 from bin.enemy import Enemy
 from bin.world import World
 from bin.tower import Tower
@@ -10,15 +11,15 @@ pgm.init()
 #create clock
 clock = pgm.time.Clock()
 
-ROWS = 15
-COLS = 15
-TILE_SIZE = 64
-SCREEN_WIDTH = TILE_SIZE*COLS
-SCREEN_HEIGHT = TILE_SIZE*ROWS
-FPS = 60
+# ROWS = 15
+# COLS = 15
+# TILE_SIZE = 64
+# SCREEN_WIDTH = TILE_SIZE*COLS
+# SCREEN_HEIGHT = TILE_SIZE*ROWS
+# FPS = 60
 
 #creating window game
-screen = pgm.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pgm.display.set_mode((val.SCREEN_WIDTH, val.SCREEN_HEIGHT))
 pgm.display.set_caption("TDEFENSE")
 
 #load image
@@ -37,8 +38,8 @@ with open('bin\levels\level1.tmj') as file:
 
 #creating tower
 def create_tower(mouse_pos):
-    mouse_tile_x = mouse_pos[0] // TILE_SIZE
-    mouse_tile_y = mouse_pos[1] // TILE_SIZE
+    mouse_tile_x = mouse_pos[0] // val.TILE_SIZE
+    mouse_tile_y = mouse_pos[1] // val.TILE_SIZE
     tower = Tower(cursor_tower, mouse_tile_x, mouse_tile_y)
     tower_groups.add(tower)
 
@@ -58,7 +59,7 @@ run = True
 while run:
 
     # limits FPS to 60
-    clock.tick(FPS) 
+    clock.tick(val.FPS) 
 
     #screen fill
     screen.fill("grey100")
@@ -87,7 +88,7 @@ while run:
         mouse_pos = pgm.mouse.get_pos()
 
         #check if the mouse on the game
-        if mouse_pos[0] < SCREEN_WIDTH and mouse_pos[1] < SCREEN_HEIGHT:
+        if mouse_pos[0] < val.SCREEN_WIDTH and mouse_pos[1] < val.SCREEN_HEIGHT:
             create_tower(mouse_pos)
          
         
