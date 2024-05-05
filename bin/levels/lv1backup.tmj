@@ -56,12 +56,12 @@
         }, 
         {
          "draworder":"topdown",
-         "id":7,
+         "id":5,
          "name":"waypoints",
          "objects":[
                 {
                  "height":0,
-                 "id":2,
+                 "id":1,
                  "name":"",
                  "polyline":[
                         {
@@ -89,7 +89,7 @@
                          "y":160
                         }, 
                         {
-                         "x":-864,
+                         "x":-848,
                          "y":160
                         }],
                  "rotation":0,
@@ -105,8 +105,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":8,
- "nextobjectid":3,
+ "nextlayerid":7,
+ "nextobjectid":2,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",

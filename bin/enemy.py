@@ -30,7 +30,6 @@ class Enemy(pgm.sprite.Sprite):
 
         #calculating distance to target
         dist = self.movement.length()
-        print(dist)
 
         #check if remaining distance is greater than the enemy speed
         if dist >= self.speed:
