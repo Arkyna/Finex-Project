@@ -18,7 +18,7 @@ pgm.display.set_caption("TDEFENSE")
 
 
 # Game Variables
-placing_turret = False
+placing_tower = False
 
 
 #Load image
@@ -32,7 +32,7 @@ cursor_tower = pgm.image.load(r'assets\images\towers\tower1.png').convert_alpha(
 enemy_image = pgm.image.load(r'assets\images\monsters\enemy2.png').convert_alpha()
 
 # buttons
-buy_turret_image = pgm.image.load(r'assets\images\buttons\buy_button.png').convert_alpha()
+buy_tower_image = pgm.image.load(r'assets\images\buttons\buy_button.png').convert_alpha()
 cancel_button_image = pgm.image.load(r'assets\images\buttons\cancel_button.png').convert_alpha()
 
 #sidebar 
@@ -75,7 +75,7 @@ enemy = Enemy(world.waypoints, enemy_image)
 enemy_groups.add(enemy)
 
 # create button
-turret_button = Button(val.SCREEN_WIDTH + 30, 120, buy_turret_image, True)
+tower_button = Button(val.SCREEN_WIDTH + 30, 120, buy_tower_image, True)
 cancel_button = Button(val.SCREEN_WIDTH + 30, 180, cancel_button_image, True)
 
 #game loop
@@ -113,12 +113,12 @@ while run:
     screen.blit(sidebar_image,(960, 0))
 
     #draw buttons
-    #button for placing turret
-    if turret_button.draw(screen):
-        placing_turret = True
+    #button for placing tower
+    if tower_button.draw(screen):
+        placing_tower = True
     # if placing then show the cancel button
-    if placing_turret == True:
-        # show cursor turret
+    if placing_tower == True:
+        # show cursor tower
         cursor_rect = cursor_tower.get_rect()
         cursor_pos = pgm.mouse.get_pos()
         cursor_rect.center = cursor_pos
@@ -126,7 +126,7 @@ while run:
             screen.blit(cursor_tower, cursor_rect)
 
         if cancel_button.draw(screen):
-            placing_turret = False
+            placing_tower = False
 
     # print(tower_groups)
 
@@ -142,7 +142,7 @@ while run:
 
         #check if the mouse on the game
         if mouse_pos[0] < val.SCREEN_WIDTH and mouse_pos[1] < val.SCREEN_HEIGHT:
-            if placing_turret == True:
+            if placing_tower == True:
                 create_tower(mouse_pos)
          
         
