@@ -17,7 +17,7 @@ pgm.display.set_caption("TDEFENSE")
 
 #Load image
 #map
-map_image = pgm.image.load(r'assets\images\map\level_1.png').convert_alpha()
+map_image = pgm.image.load(r'assets\images\map\level1.png').convert_alpha()
 
 #individual tower image for mouse cursor
 cursor_tower = pgm.image.load(r'assets\images\towers\tower1.png').convert_alpha()
@@ -26,7 +26,7 @@ cursor_tower = pgm.image.load(r'assets\images\towers\tower1.png').convert_alpha(
 enemy_image = pgm.image.load(r'assets\images\monsters\enemy1.png').convert_alpha()
 
 #load json data for level
-with open('bin\levels\level1_test.tmj') as file:
+with open('bin\levels\level1.tmj') as file:
     world_data = json.load(file)
 
 #creating tower
