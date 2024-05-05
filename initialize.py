@@ -11,18 +11,11 @@ pgm.init()
 #create clock
 clock = pgm.time.Clock()
 
-# ROWS = 15
-# COLS = 15
-# TILE_SIZE = 64
-# SCREEN_WIDTH = TILE_SIZE*COLS
-# SCREEN_HEIGHT = TILE_SIZE*ROWS
-# FPS = 60
-
 #creating window game
 screen = pgm.display.set_mode((val.SCREEN_WIDTH, val.SCREEN_HEIGHT))
 pgm.display.set_caption("TDEFENSE")
 
-#load image
+#Load image
 #map
 map_image = pgm.image.load(r'assets\images\map\level_1.png').convert_alpha()
 
