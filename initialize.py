@@ -42,6 +42,10 @@ sidebar_image = pgm.image.load(r'assets\images\gui\sidepanel.png').convert_alpha
 with open('bin\levels\level1.tmj') as file:
     world_data = json.load(file)
 
+pgm.mixer.music.load(r"assets\audios\bgm.ogg")
+pgm.mixer.music.play()
+
+
 #creating tower
 def create_tower(mouse_pos):
     mouse_tile_x = mouse_pos[0] // val.TILE_SIZE
