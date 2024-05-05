@@ -73,7 +73,7 @@ Setelah itu anda bisa menginstall pygame
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
 ### Screenshot Map
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](./assets/images/UML_Game/map_game.png)
 
 ### Screenshot Tower
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
