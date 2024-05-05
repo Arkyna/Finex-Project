@@ -63,7 +63,7 @@ Untuk Menjalankan project, install python ke dalam laptop atau computer anda dan
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
 ### Screenshot Map
-![App Screenshot](./assets/images/map/map_mentah.png)
+![App Screenshot](./assets/images/map/level1.png)
 
 ### Screenshot Tower
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
