@@ -9,7 +9,7 @@ class Tower(pgm.sprite.Sprite):
         self.tile_y = tile_y
 
         #calculating center coordinates
-        self.x = self.tile_x * val.TILE_SIZE
+        self.x = (self.tile_x + 0.5) * val.TILE_SIZE
         self.y = self.tile_y * val.TILE_SIZE
         self.image = image
         self.rect = self.image.get_rect()
