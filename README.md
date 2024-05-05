@@ -55,6 +55,8 @@ Untuk Menjalankan project, install python ke dalam laptop atau computer anda dan
 ```bash
   sudo apt-get install python3-pygame
 ```
+
+Dan silahkan menjalankan file initialize.py
     
 ## UML Class Sentinel Siege
 ![App Screenshot](./assets/images/UML_Game/uml_game1.png)
@@ -89,8 +91,8 @@ Untuk Menjalankan project, install python ke dalam laptop atau computer anda dan
 | Nama |  NIM     | Kontribusi                |
 | :-------- | :------- | :------------------------- |
 | Alwi Arfan Solin | 122140197 | Asset Search, Programming Asset |
-| Jhoel Robert Hutagalung | 122140174 |Main Programmer  |
-| Eric Arwido Damanik | 122140157 |Lead Project, Second Programmer   |
+| Jhoel Robert Hutagalung | 122140174 | Programmer  |
+| Eric Arwido Damanik | 122140157 | Project Leader,  Programmer   |
 | Lucas Hamonangan Simaremare | 122140196 |  |
 | Dyo Dwi Carol Bukit | 122140 |  |
 | Afif Malik Azhar | 121140 |  |
