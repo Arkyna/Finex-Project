@@ -35,6 +35,13 @@ enemy_image = pgm.image.load(r'assets\images\monsters\enemy1.png').convert_alpha
 with open('bin\levels\level1.tmj') as file:
     world_data = json.load(file)
 
+#creating tower
+def create_tower(mouse_pos):
+    mouse_tile_x = mouse_pos[0] // TILE_SIZE
+    mouse_tile_y = mouse_pos[1] // TILE_SIZE
+    tower = Tower(cursor_tower, mouse_tile_x, mouse_tile_y)
+    tower_groups.add(tower)
+
 #create world
 world = World(world_data, map_image)
 world.process_data()
@@ -65,7 +72,6 @@ while run:
     #update groups
     enemy_groups.update()
 
-
     #draw groups
     enemy_groups.draw(screen)
     tower_groups.draw(screen)
@@ -79,8 +85,11 @@ while run:
     #mouse click
     if event.type == pgm.MOUSEBUTTONDOWN and event.button == 1:
         mouse_pos = pgm.mouse.get_pos()
-        tower = Tower(cursor_tower, mouse_pos)
-        tower_groups.add(tower)
+
+        #check if the mouse on the game
+        if mouse_pos[0] < SCREEN_WIDTH and mouse_pos[1] < SCREEN_HEIGHT:
+            create_tower(mouse_pos)
+         
         
     #update display
     pgm.display.flip()
