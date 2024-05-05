@@ -17,7 +17,7 @@ pgm.display.set_caption("TDEFENSE")
 
 #Load image
 #map
-map_image = pgm.image.load(r'assets\images\map\level_1.png').convert_alpha()
+map_image = pgm.image.load(r'assets\images\map\level1.png').convert_alpha()
 
 #individual tower image for mouse cursor
 cursor_tower = pgm.image.load(r'assets\images\towers\tower1.png').convert_alpha()
