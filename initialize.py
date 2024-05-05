@@ -12,7 +12,7 @@ pgm.init()
 clock = pgm.time.Clock()
 
 #creating window game
-screen = pgm.display.set_mode((val.SCREEN_WIDTH, val.SCREEN_HEIGHT))
+screen = pgm.display.set_mode((val.SCREEN_WIDTH + val.SIDE_PANEL, val.SCREEN_HEIGHT))
 pgm.display.set_caption("TDEFENSE")
 
 #Load image
@@ -33,8 +33,21 @@ with open('bin\levels\level1.tmj') as file:
 def create_tower(mouse_pos):
     mouse_tile_x = mouse_pos[0] // val.TILE_SIZE
     mouse_tile_y = mouse_pos[1] // val.TILE_SIZE
-    tower = Tower(cursor_tower, mouse_tile_x, mouse_tile_y)
-    tower_groups.add(tower)
+
+    #calculating squential numbers of tile on level
+    mouse_tile_num = (mouse_tile_y * val.COLS) + mouse_tile_x
+
+    #checking tile if grass
+    if world.tile_map[mouse_tile_num] == 39:
+        #checking the place is already occupied by tower
+        space_is_free = True
+        for tower in tower_groups:
+            if (mouse_tile_x, mouse_tile_y) == (tower.tile_x, tower.tile_y):
+                space_is_free = False
+        #if free then place tower
+        if space_is_free == True:
+            new_tower = Tower(cursor_tower, mouse_tile_x, mouse_tile_y)
+            tower_groups.add(new_tower)
 
 #create world
 world = World(world_data, map_image)
@@ -69,6 +82,8 @@ while run:
     #draw groups
     enemy_groups.draw(screen)
     tower_groups.draw(screen)
+
+    print(tower_groups)
 
     #event handler
     for event in pgm.event.get():
