@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="15" height="15" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="2">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="15" height="15" tilewidth="64" tileheight="64" infinite="0" nextlayerid="8" nextobjectid="3">
  <editorsettings>
   <export target="level1.tmj" format="json"/>
  </editorsettings>
@@ -43,9 +43,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="5" name="waypoints" visible="0">
-  <object id="1" x="800" y="0">
-   <polyline points="0,0 0,864 -640,864 -640,544 -256,544 -256,160 -848,160"/>
+ <objectgroup id="7" name="waypoints">
+  <object id="2" x="800" y="0">
+   <polyline points="0,0 0,864 -640,864 -640,544 -256,544 -256,160 -864,160"/>
   </object>
  </objectgroup>
 </map>
