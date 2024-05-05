@@ -53,16 +53,6 @@ Untuk Menjalankan project, install python ke dalam laptop atau computer anda dan
 
 ### For Linux
 ```bash
-  sudo su
-```
-Masukkan Password anda
-
-```bash
-  apt update
-```
-Setelah itu anda bisa menginstall pygame
-
-```bash
   sudo apt-get install python3-pygame
 ```
     
@@ -73,7 +63,7 @@ Setelah itu anda bisa menginstall pygame
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
 ### Screenshot Map
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](./assets/images/map/map_mentah.png)
 
 ### Screenshot Tower
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
