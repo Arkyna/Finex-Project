@@ -2,7 +2,7 @@ import pygame as pgm
 import json
 from bin.enemy import Enemy
 from bin.world import World
-from bin.towers import Tower
+from bin.tower import Tower
 
 #initialisasi
 pgm.init()
