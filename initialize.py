@@ -28,7 +28,7 @@ map_image = pgm.image.load('assets\images\map\level_1.png').convert_alpha()
 enemy_image = pgm.image.load('assets\images\monsters\enemy1.png').convert_alpha()
 
 #load json data for level
-with open('bin\levels\_cord.tmj') as file:
+with open('bin\levels\level1.tmj') as file:
     world_data = json.load(file)
 
 #create world
