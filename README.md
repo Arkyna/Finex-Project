@@ -40,9 +40,10 @@ Sentinel Siege adalah permainan Tower Defense Game yang memiliki tema Medieval d
 
 ## Depedency
 
-Python : 3.8.X
-Pygames: 2.5.2
-
+```bash
+  Python : 3.8.X
+  Pygames: 2.5.2
+```
 
 
 ## Installation
