@@ -76,6 +76,17 @@ while run:
     # limits FPS to 60
     clock.tick(val.FPS) 
 
+     #########################
+    # UPDATING SECTION
+    #########################
+
+    #update groups
+    enemy_groups.update()
+
+    #########################
+    # DRAWING SECTION
+    #########################
+
     #screen fill
     screen.fill("grey100")
 
@@ -85,12 +96,14 @@ while run:
     #enemy path
     pgm.draw.lines(screen, "grey0", False, world.waypoints)
 
-    #update groups
-    enemy_groups.update()
-
     #draw groups
     enemy_groups.draw(screen)
     tower_groups.draw(screen)
+
+    #draw buttons
+    #button for placing turret
+    turret_button.draw(screen)
+    cancel_button.draw(screen)
 
     print(tower_groups)
 

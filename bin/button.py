@@ -17,6 +17,6 @@ class Button():
                 pass
 
         # draw buttoon on screen
-        surface.blid(self.image, self.rect)
+        surface.blit(self.image, self.rect)
 
 #testing coomit
