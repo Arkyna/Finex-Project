@@ -27,8 +27,8 @@ cursor_tower = pgm.image.load(r'assets\images\towers\tower1.png').convert_alpha(
 enemy_image = pgm.image.load(r'assets\images\monsters\enemy1.png').convert_alpha()
 
 # buttons
-buy_turret_image = pgm.image.load(r'assets\images\button\buy_turret.png').convert_alpha()
-cancel_button_image = pgm.image.load(r'assets\images\button\cancel_turret.png').convert_alpha()
+buy_turret_image = pgm.image.load(r'assets\images\buttons\buy_button.png').convert_alpha()
+cancel_button_image = pgm.image.load(r'assets\images\buttons\cancel_button.png').convert_alpha()
 
 #load json data for level
 with open('bin\levels\level1.tmj') as file:

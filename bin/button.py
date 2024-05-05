@@ -3,7 +3,7 @@ import pygame as pgm
 class Button():
     def __init__(self, x , y , image):
         self.image = image
-        self.recc = self.image.get_rect()
+        self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
 
     def draw(self, surface):
