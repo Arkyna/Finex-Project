@@ -42,7 +42,7 @@ sidebar_image = pgm.image.load(r'assets\images\gui\sidepanel.png').convert_alpha
 with open('bin\levels\level1.tmj') as file:
     world_data = json.load(file)
 
-pgm.mixer.music.load(r"assets\audios\bgm.ogg")
+pgm.mixer.music.load(r"assets\audios\bgm2.mp3")
 pgm.mixer.music.play()
 
 
