@@ -38,6 +38,13 @@ Sentinel Siege adalah permainan Tower Defense Game yang memiliki tema Medieval d
 
 
 
+## Depedency
+
+Python : 3.8.X
+Pygames: 2.5.2
+
+
+
 ## Installation
 
 Untuk Menjalankan project, install python ke dalam laptop atau computer anda dan ketika sudah terinstall, buka terminal yang anda pakai dan gunakan perintah
@@ -94,4 +101,6 @@ Untuk Menjalankan project, install python ke dalam laptop atau computer anda dan
 | Lucas Hamonangan Simaremare | 122140196 |  |
 | Dyo Dwi Carol Bukit | 122140 |  |
 | Afif Malik Azhar | 121140 |  |
+
+## Reference
 
