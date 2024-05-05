@@ -57,7 +57,7 @@ Untuk Menjalankan project, install python ke dalam laptop atau computer anda dan
 ```
     
 ## UML Class Sentinel Siege
-![App Screenshot](./assets/images/UML_Game/uml_game1.png)
+![App Screenshot](./assets/images/map/map_mentah.png)
 
 ## Screenshot Game 
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
