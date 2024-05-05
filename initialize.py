@@ -14,7 +14,7 @@ clock = pgm.time.Clock()
 
 #creating window game
 screen = pgm.display.set_mode((val.SCREEN_WIDTH + val.SIDE_PANEL, val.SCREEN_HEIGHT))
-pgm.display.set_caption("TDEFENSE")
+pgm.display.set_caption(val.GAME_NAME)
 
 
 # Game Variables
