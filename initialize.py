@@ -26,7 +26,7 @@ cursor_tower = pgm.image.load(r'assets\images\towers\tower1.png').convert_alpha(
 enemy_image = pgm.image.load(r'assets\images\monsters\enemy1.png').convert_alpha()
 
 #load json data for level
-with open('bin\levels\level1_branch.tmj') as file:
+with open('bin\levels\level1.tmj') as file:
     world_data = json.load(file)
 
 #creating tower
@@ -37,8 +37,8 @@ def create_tower(mouse_pos):
     #calculating squential numbers of tile on level
     mouse_tile_num = (mouse_tile_y * val.COLS) + mouse_tile_x
 
-    #checking tile if grass
-    if world.tile_map[mouse_tile_num] == 39:
+    #checking tile if place able
+    if world.tile_map[mouse_tile_num] == 74:
         #checking the place is already occupied by tower
         space_is_free = True
         for tower in tower_groups:
