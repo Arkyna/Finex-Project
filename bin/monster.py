@@ -8,7 +8,7 @@ class Monster(pgm.sprite.Sprite):
         self.waypoints = waypoints
         self.pos = Vector2(self.waypoints[0])
         self.target_waypoint = 1
-        self.speed = 1.5
+        self.speed = 20
         self.angle = 0
         self.original_image = image
         self.image = pgm.transform.rotate(self.original_image, self.angle)
@@ -21,12 +21,15 @@ class Monster(pgm.sprite.Sprite):
 
     def move(self):
         #defining target waypoint
+
         if self.target_waypoint < len(self.waypoints):     
             self.target = Vector2(self.waypoints[self.target_waypoint])
             self.movement = self.target - self.pos
         else:
             #enemy reached the end of the path
-            self.kill()
+            # self.kill()
+            self.target_waypoint = -1
+            
 
         #calculating distance to target
         dist = self.movement.length()
