@@ -38,6 +38,15 @@ Sentinel Siege adalah permainan Tower Defense Game yang memiliki tema Medieval d
 
 
 
+## Depedency
+
+```bash
+  Python v3.8.X
+  Pygames v2.5.2
+  math lib
+```
+
+
 ## Installation
 
 Untuk Menjalankan project, install python ke dalam laptop atau computer anda dan ketika sudah terinstall, buka terminal yang anda pakai dan gunakan perintah
@@ -55,6 +64,8 @@ Untuk Menjalankan project, install python ke dalam laptop atau computer anda dan
 ```bash
   sudo apt-get install python3-pygame
 ```
+
+Dan silahkan menjalankan file initialize.py
     
 ## UML Class Sentinel Siege
 ![App Screenshot](./assets/images/UML_Game/uml_game1.png)
@@ -63,7 +74,7 @@ Untuk Menjalankan project, install python ke dalam laptop atau computer anda dan
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
 ### Screenshot Map
-![App Screenshot](./assets/images/map/map_mentah.png)
+![App Screenshot](./assets/images/map/level1.png)
 
 ### Screenshot Tower
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
@@ -88,10 +99,12 @@ Untuk Menjalankan project, install python ke dalam laptop atau computer anda dan
 
 | Nama |  NIM     | Kontribusi                |
 | :-------- | :------- | :------------------------- |
-| Alwi Arfan Solin | 122140197 | Asset Search, Programming Asset |
-| Jhoel Robert Hutagalung | 122140174 |Main Programmer  |
-| Eric Arwido Damanik | 122140157 |Lead Project, Second Programmer   |
-| Lucas Hamonangan Simaremare | 122140196 |  |
-| Dyo Dwi Carol Bukit | 122140 |  |
-| Afif Malik Azhar | 121140 |  |
+| Alwi Arfan Solin | 122140197 | Asset Search, Programmer |
+| Jhoel Robert Hutagalung | 122140174 | Programmer  |
+| Eric Arwido Damanik | 122140157 | Project Leader,  Programmer   |
+| Lucas Hamonangan Simaremare | 122140196 | Programmer |
+| Dyo Dwi Carol Bukit | 122140145  | Programmer |
+| Afif Malik Azhar | 120140117 | Programmer |
+
+## Reference
 
