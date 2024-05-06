@@ -99,12 +99,12 @@ Dan silahkan menjalankan file initialize.py
 
 | Nama |  NIM     | Kontribusi                |
 | :-------- | :------- | :------------------------- |
-| Alwi Arfan Solin | 122140197 | Asset Search, Programming Asset |
+| Alwi Arfan Solin | 122140197 | Asset Search, Programmer Asset |
 | Jhoel Robert Hutagalung | 122140174 | Programmer  |
 | Eric Arwido Damanik | 122140157 | Project Leader,  Programmer   |
-| Lucas Hamonangan Simaremare | 122140196 |  |
-| Dyo Dwi Carol Bukit | 122140 |  |
-| Afif Malik Azhar | 121140 |  |
+| Lucas Hamonangan Simaremare | 122140196 | Programmer support |
+| Dyo Dwi Carol Bukit | 122140145  | Programmer support |
+| Afif Malik Azhar | 120140117 | Programmer support |
 
 ## Reference
 
