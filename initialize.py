@@ -1,7 +1,7 @@
 import pygame as pgm
 import json
 from bin import globalvar as val
-from bin.enemy import Enemy
+from bin.monster import Monster
 from bin.world import World
 from bin.button import Button
 from bin.tower import Tower
@@ -35,7 +35,7 @@ base_tower = pgm.image.load(r'assets\images\towers\tower1.png').convert_alpha()
 cursor_tower = pgm.image.load(r'assets\images\towers\tower1.png').convert_alpha()
 
 #enemies
-enemy_image = pgm.image.load(r'assets\images\monsters\enemy2.png').convert_alpha()
+monster_image = pgm.image.load(r'assets\images\monsters\enemy2.png').convert_alpha()
 
 # buttons
 buy_tower_image = pgm.image.load(r'assets\images\buttons\buy_button.png').convert_alpha()
@@ -44,13 +44,13 @@ cancel_button_image = pgm.image.load(r'assets\images\buttons\cancel_button.png')
 # sidebar 
 sidebar_image = pgm.image.load(r'assets\images\gui\sidepanel.png').convert_alpha()
 
-# load json data for enemy path in levels
+# load json data for monster path in levels
 with open('bin\levels\level1.tmj') as file:
     world_data = json.load(file)
 
 # audio
-pgm.mixer.music.load(r"assets\audios\bgm2.mp3")
-pgm.mixer.music.play()
+pgm.mixer.music.load(r"assets\audios\bgm.ogg")
+pgm.mixer.music.play(-1)
 
 
 # creating tower
@@ -79,12 +79,12 @@ world = World(world_data, map_image)
 world.process_data()
 
 # creating groups
-enemy_groups = pgm.sprite.Group()
+monster_groups = pgm.sprite.Group()
 tower_groups = pgm.sprite.Group()
 
 
-enemy = Enemy(world.waypoints, enemy_image)
-enemy_groups.add(enemy)
+monster = Monster(world.waypoints, monster_image)
+monster_groups.add(monster)
 
 # create button
 tower_button = Button(val.SCREEN_WIDTH + 30, 120, buy_tower_image, True)
@@ -102,7 +102,7 @@ while run:
     #########################
 
     #update groups
-    enemy_groups.update()
+    monster_groups.update()
     tower_groups.update()
 
     #########################
@@ -115,7 +115,7 @@ while run:
     #draw level
     world.draw(screen)
 
-    #enemy path
+    #monster path
     pgm.draw.lines(screen, "grey0", False, world.waypoints)
 
     #draw groups
@@ -125,7 +125,7 @@ while run:
         # Draw tower animation frame
         screen.blit(tower.image, tower.rect)
 
-    enemy_groups.draw(screen)
+    monster_groups.draw(screen)
     tower_groups.draw(screen)
 
     #draw sidebar

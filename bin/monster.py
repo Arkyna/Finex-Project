@@ -2,7 +2,7 @@ import pygame as pgm
 from pygame.math import Vector2
 import math
 
-class Enemy(pgm.sprite.Sprite):
+class Monster(pgm.sprite.Sprite):
     def __init__(self, waypoints, image):
         pgm.sprite.Sprite.__init__(self)
         self.waypoints = waypoints
