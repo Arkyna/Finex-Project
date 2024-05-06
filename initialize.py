@@ -35,7 +35,7 @@ base_tower = pgm.image.load(r'assets\images\towers\tower1.png').convert_alpha()
 cursor_tower = pgm.image.load(r'assets\images\towers\tower1.png').convert_alpha()
 
 #enemies
-monster_image = pgm.image.load(r'assets\images\monsters\enemy2.png').convert_alpha()
+monster_image = pgm.image.load(r'assets\images\monsters\enemy1.png').convert_alpha()
 
 # buttons
 buy_tower_image = pgm.image.load(r'assets\images\buttons\buy_button.png').convert_alpha()
