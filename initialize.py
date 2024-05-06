@@ -61,7 +61,7 @@ def create_tower(mouse_pos):
     # calculating squential numbers of tile on level
     mouse_tile_num = (mouse_tile_y * val.COLS) + mouse_tile_x
 
-    # checking tile if place able
+    # checking tile if placeable
     if world.tile_map[mouse_tile_num] == 74:
         # checking the place is already occupied by tower
         space_is_free = True

@@ -8,7 +8,7 @@ class Monster(pgm.sprite.Sprite):
         self.waypoints = waypoints
         self.pos = Vector2(self.waypoints[0])
         self.target_waypoint = 1
-        self.speed = 20
+        self.speed = 3.5
         self.angle = 0
         self.original_image = image
         self.image = pgm.transform.rotate(self.original_image, self.angle)
