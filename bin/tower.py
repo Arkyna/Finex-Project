@@ -7,6 +7,7 @@ class Tower(pgm.sprite.Sprite):
     def __init__(self, base_tower, sprite_sheet, tile_x, tile_y):
         pgm.sprite.Sprite.__init__(self)
         #cooldown counter
+        self.range = 90
         self.cooldown = 1500
         self.last_frame = pgm.time.get_ticks()
 
@@ -23,15 +24,25 @@ class Tower(pgm.sprite.Sprite):
         self.base_rect = self.base_tower.get_rect()
         self.base_rect.center = (self.x, self.y)
 
-        # animation var
+        # animation frame variable
         self.sprite_sheet = sprite_sheet
         self.animation_frames = self.load_images()
         self.frame_index = 0
         self.update_time = pgm.time.get_ticks()
 
+        # animation actual updator sprite
         self.image = self.animation_frames[self.frame_index]
         self.rect = self.image.get_rect()
-        self.rect.center = (self.x, self.y)
+        self.rect.center = (self.x, (self.y - 30))
+
+        #creating transparent circle showing range
+        self.range_image = pgm.Surface((self.range * 2, self. range * 2))
+        self.range_image.fill((0, 0, 0))
+        self.range_image.set_colorkey((0, 0, 0))
+        pgm.draw.circle(self.range_image, "grey100",(self.range, self.range), self.range)
+        self.range_image.set_alpha(100)
+        self.range_rect = self.range_image.get_rect()
+        self.range_rect.center = self.rect.center
 
         
     def load_images(self):
@@ -62,3 +73,9 @@ class Tower(pgm.sprite.Sprite):
                 self.frame_index = 0
                 #record completed time and clear target so the cooldown can start
                 self.last_frame = pgm.time.get_ticks()
+
+    def draw(self, surface):
+        surface.blit(self.range_image, self.range_rect)
+        
+    def rotate(self):
+        pass

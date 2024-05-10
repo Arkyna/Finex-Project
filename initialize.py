@@ -34,7 +34,7 @@ base_tower = pgm.image.load(r'assets\images\towers\tower1.png').convert_alpha()
 # individual tower image for mouse cursor
 cursor_tower = pgm.image.load(r'assets\images\towers\tower1.png').convert_alpha()
 
-#enemies
+# enemies
 monster_image = pgm.image.load(r'assets\images\monsters\enemy1.png').convert_alpha()
 
 # buttons
@@ -45,12 +45,12 @@ cancel_button_image = pgm.image.load(r'assets\images\buttons\cancel_button.png')
 sidebar_image = pgm.image.load(r'assets\images\gui\sidepanel.png').convert_alpha()
 
 # load json data for monster path in levels
-with open('bin\levels\level1.tmj') as file:
+with open(r'bin\levels\level1.tmj') as file:
     world_data = json.load(file)
 
 # audio
-pgm.mixer.music.load(r"assets\audios\bgm.ogg")
-pgm.mixer.music.play(-1)
+# pgm.mixer.music.load(r"assets\audios\bgm.ogg")
+# pgm.mixer.music.play(-1)
 
 
 # creating tower
@@ -126,7 +126,7 @@ while run:
         screen.blit(tower.image, tower.rect)
 
     monster_groups.draw(screen)
-    tower_groups.draw(screen)
+    # tower_groups.draw(screen)
 
     #draw sidebar
     screen.blit(sidebar_image,(960, 0))
