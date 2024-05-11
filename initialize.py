@@ -18,6 +18,7 @@ pgm.display.set_caption(val.GAME_NAME)
 
 
 # Game Variables
+level_started = False
 last_enemy_spawn = pgm.time.get_ticks()
 placing_tower = False
 selected_tower = None
@@ -50,9 +51,10 @@ monster_images = {
 # buttons
 buy_tower_image = pgm.image.load(r'assets\images\buttons\buy_button.png').convert_alpha()
 cancel_button_image = pgm.image.load(r'assets\images\buttons\cancel_button.png').convert_alpha()
-upgrade_button_image = pgm.image.load(r'assets\images\buttons\upgrade.png').convert_alpha()
+upgrade_button_image = pgm.image.load(r'assets\images\buttons\upgrade.png').convert_alpha()# sidebar 
+begin_image = pgm.image.load(r'assets\images\buttons\begin.png').convert_alpha()# sidebar 
 
-# sidebar 
+
 sidebar_image = pgm.image.load(r'assets\images\gui\sidepanel.png').convert_alpha()
 
 # load json data for monster path in levels
@@ -120,6 +122,7 @@ tower_groups = pgm.sprite.Group()
 tower_button = Button(val.SCREEN_WIDTH + 30, 120, buy_tower_image, True)
 cancel_button = Button(val.SCREEN_WIDTH + 30, 180, cancel_button_image, True)
 upgrade_button = Button(val.SCREEN_WIDTH + 30, 120, upgrade_button_image, True)
+begin_button = Button(val.SCREEN_WIDTH + 50, 300, begin_image, True)
 
 # game loop
 run = True
@@ -160,14 +163,20 @@ while run:
     draw_text(str(world.health), text_font, "grey100", 0, 0)
     draw_text(str(world.money), text_font, "grey100", 0, 30)
 
-    # Spawn enemies
-    if pgm.time.get_ticks() - last_enemy_spawn > val.SPAWN_COOLDOWN:
-        if world.spawned_enemies < len(world.enemy_list):
-            enemy_type = world.enemy_list[world.spawned_enemies]
-            monster = Monster(enemy_type, world.waypoints, monster_images)
-            monster_groups.add(monster)
-            world.spawned_enemies += 1
-            last_enemy_spawn = pgm.time.get_ticks()
+
+    # cek if the level has been started or not
+    if level_started == False :
+        if begin_button.draw(screen) :
+            level_started = True
+    else :
+        # Spawn enemies
+        if pgm.time.get_ticks() - last_enemy_spawn > val.SPAWN_COOLDOWN:
+            if world.spawned_enemies < len(world.enemy_list):
+                enemy_type = world.enemy_list[world.spawned_enemies]
+                monster = Monster(enemy_type, world.waypoints, monster_images)
+                monster_groups.add(monster)
+                world.spawned_enemies += 1
+                last_enemy_spawn = pgm.time.get_ticks()
 
     monster_groups.draw(screen)
     # tower_groups.draw(screen)
