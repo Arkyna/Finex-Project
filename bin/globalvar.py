@@ -10,6 +10,7 @@ FPS = 60
 
 #Monosters constants
 SPEED = 1.5
+SPAWN_COOLDOWN = 400
 
 #tower constants
 ANIMATION_STEPS = 6
