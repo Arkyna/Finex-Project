@@ -18,6 +18,7 @@ pgm.display.set_caption(val.GAME_NAME)
 
 
 # Game Variables
+last_enemy_spawn = pgm.time.get_ticks()
 placing_tower = False
 selected_tower = None
 
@@ -39,7 +40,12 @@ base_tower = pgm.image.load(r'assets\images\towers\tower1.png').convert_alpha()
 cursor_tower = pgm.image.load(r'assets\images\towers\tower1.png').convert_alpha()
 
 # enemies
-monster_image = pgm.image.load(r'assets\images\monsters\enemy1.png').convert_alpha()
+monster_images = {
+    "weak": pgm.image.load(r'assets\images\monsters\enemy1.png').convert_alpha(),
+    "medium": pgm.image.load(r'assets\images\monsters\enemy2.png').convert_alpha(),
+    "strong": pgm.image.load(r'assets\images\monsters\enemy3.png').convert_alpha(),
+    "elite": pgm.image.load(r'assets\images\monsters\enemy4.png').convert_alpha()
+}
 
 # buttons
 buy_tower_image = pgm.image.load(r'assets\images\buttons\buy_button.png').convert_alpha()
@@ -97,10 +103,6 @@ world.process_data()
 monster_groups = pgm.sprite.Group()
 tower_groups = pgm.sprite.Group()
 
-
-monster = Monster(world.waypoints, monster_image)
-monster_groups.add(monster)
-
 # create button
 tower_button = Button(val.SCREEN_WIDTH + 30, 120, buy_tower_image, True)
 cancel_button = Button(val.SCREEN_WIDTH + 30, 180, cancel_button_image, True)
@@ -145,6 +147,15 @@ while run:
         # screen.blit(tower.base_tower, tower.base_rect)
         # # Draw tower animation frame
         # screen.blit(tower.image, tower.rect)
+    
+    # Spawn enemies
+    if pgm.time.get_ticks() - last_enemy_spawn > val.SPAWN_COOLDOWN:
+        if world.spawned_enemies < len(world.enemy_list):
+            enemy_type = bin.world.enemy_list[world.spawned_enemies]
+            monster = Monster(enemy_type, world.waypoints, monster_images)
+            monster_groups.add(monster)
+            world.spawned_enemies += 1
+            last_enemy_spawn = pgm.time.get_ticks()
 
     monster_groups.draw(screen)
     # tower_groups.draw(screen)
