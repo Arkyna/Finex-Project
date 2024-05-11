@@ -19,6 +19,7 @@ pgm.display.set_caption(val.GAME_NAME)
 
 # Game Variables
 placing_tower = False
+selected_tower = None
 
 
 # Load images
@@ -73,6 +74,16 @@ def create_tower(mouse_pos):
             new_tower = Tower(base_tower, tower_sheet, mouse_tile_x, mouse_tile_y)
             tower_groups.add(new_tower)
 
+def select_tower(mouse_pos):
+    mouse_tile_x = mouse_pos[0] // val.TILE_SIZE
+    mouse_tile_y = mouse_pos[1] // val.TILE_SIZE
+    for tower in tower_groups:
+        if (mouse_tile_x, mouse_tile_y) == (tower.tile_x, tower.tile_y):
+            return tower
+
+def clear_selection():
+    for tower in tower_groups:
+        tower.selected = False
 
 # create world
 world = World(world_data, map_image)
@@ -103,7 +114,11 @@ while run:
 
     #update groups
     monster_groups.update()
-    tower_groups.update()
+    tower_groups.update(monster_groups)
+
+    #highlit selected turret
+    if selected_tower:
+        selected_tower.selected = True
 
     #########################
     # DRAWING SECTION
@@ -120,10 +135,11 @@ while run:
 
     #draw groups
     for tower in tower_groups:
-        # Draw tower base
-        screen.blit(tower.base_tower, tower.base_rect)
-        # Draw tower animation frame
-        screen.blit(tower.image, tower.rect)
+        tower.draw(screen)
+        # # Draw tower base
+        # screen.blit(tower.base_tower, tower.base_rect)
+        # # Draw tower animation frame
+        # screen.blit(tower.image, tower.rect)
 
     monster_groups.draw(screen)
     # tower_groups.draw(screen)
@@ -160,8 +176,13 @@ while run:
 
         #check if the mouse on the game
         if mouse_pos[0] < val.SCREEN_WIDTH and mouse_pos[1] < val.SCREEN_HEIGHT:
+           # clear selected tower
+            selected_tower = False
+            clear_selection()
             if placing_tower == True:
                 create_tower(mouse_pos)
+            else:
+                selected_tower = select_tower(mouse_pos)
          
         
     #update display
