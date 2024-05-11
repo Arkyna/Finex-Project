@@ -2,6 +2,8 @@ import pygame as pgm
 
 class Button():
     def __init__(self, x , y , image, single_click):
+        height = image.get_height()
+        width = image.get_width()
         self.image = image
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)

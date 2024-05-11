@@ -122,7 +122,7 @@ tower_groups = pgm.sprite.Group()
 tower_button = Button(val.SCREEN_WIDTH + 30, 120, buy_tower_image, True)
 cancel_button = Button(val.SCREEN_WIDTH + 30, 180, cancel_button_image, True)
 upgrade_button = Button(val.SCREEN_WIDTH + 30, 120, upgrade_button_image, True)
-begin_button = Button(val.SCREEN_WIDTH + 50, 300, begin_image, True)
+begin_button = Button(val.SCREEN_WIDTH + 30, 240, begin_image, True)
 
 # game loop
 run = True
@@ -163,12 +163,15 @@ while run:
     draw_text(str(world.health), text_font, "grey100", 0, 0)
     draw_text(str(world.money), text_font, "grey100", 0, 30)
 
+    #draw sidebar
+    screen.blit(sidebar_image,(960, 0))
 
     # cek if the level has been started or not
-    if level_started == False :
-        if begin_button.draw(screen) :
+    if level_started == False:
+        if begin_button.draw(screen):
             level_started = True
-    else :
+            print(begin_button)
+    else:
         # Spawn enemies
         if pgm.time.get_ticks() - last_enemy_spawn > val.SPAWN_COOLDOWN:
             if world.spawned_enemies < len(world.enemy_list):
@@ -180,9 +183,6 @@ while run:
 
     monster_groups.draw(screen)
     # tower_groups.draw(screen)
-
-    #draw sidebar
-    screen.blit(sidebar_image,(960, 0))
 
     #draw buttons
     #button for placing tower
