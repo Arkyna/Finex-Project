@@ -69,7 +69,7 @@ def draw_text(text, font, text_col, x, y):
     screen.blit(img, (x, y))
 
 # audio
-# pgm.mixer.music.load(r"assets\audios\bgm.ogg")
+# pgm.mixer.music.load(r"assets\audios\bgm2.mp3")
 # pgm.mixer.music.play(-1)
 
 
