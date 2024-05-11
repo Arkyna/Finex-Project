@@ -1,10 +1,13 @@
 import pygame as pgm
 import random
+import bin.globalvar as val
 from bin.enemy_data import ENEMY_SPAWN_DATA
 
 class World():
     def __init__(self, data, map_image):
         self.level = 1
+        self.health = val.HEALTH
+        self.money = val.MONEY
         self.tile_map = []
         self.waypoints = []
         self.level_data = data
@@ -31,12 +34,12 @@ class World():
             temp_y = point.get("y")
             self.waypoints.append((temp_x, temp_y))
 
-    def proses_enemies(self):
+    def process_enemies(self):
         enemies = ENEMY_SPAWN_DATA[self.level -1]
-        for enemy_type in self.enemies :
+        for enemy_type in enemies :
             enemies_to_spawn = enemies[enemy_type]
             for enemy in range(enemies_to_spawn):
-                self.eney_list.append(enemy_type)
+                self.enemy_list.append(enemy_type)
         
         #randomize the list to shuffle the enemies
         random.shuffle(self.enemy_list)

@@ -7,6 +7,8 @@ SIDE_PANEL = 200
 SCREEN_WIDTH = TILE_SIZE*COLS
 SCREEN_HEIGHT = TILE_SIZE*ROWS
 FPS = 60
+HEALTH = 100
+MONEY = 1000
 
 #Monosters constants
 SPEED = 1.5
@@ -14,19 +16,24 @@ SPAWN_COOLDOWN = 400
 
 #tower constants
 ANIMATION_STEPS = 6
-ANIMATION_DELAY = 50
+ANIMATION_DELAY = 30
 TOWER_LEVELS = 3
+BUY_COST = 50
+KILL_REWARD = 100
+UPGRADE_COST = 100
+
+DAMAGE = 5
 
 # Tower's data
 TOWER_DATA = [
     {
         #1
-        "range": 90,
+        "range": 110,
         "cooldown": 1500,
     },
     {
         #2
-        "range": 110,
+        "range": 150,
         "cooldown": 1500,
     },
     {

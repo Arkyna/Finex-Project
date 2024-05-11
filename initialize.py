@@ -59,6 +59,15 @@ sidebar_image = pgm.image.load(r'assets\images\gui\sidepanel.png').convert_alpha
 with open(r'bin\levels\level1.tmj') as file:
     world_data = json.load(file)
 
+#load fonts for displaying text on the screen
+text_font = pgm.font.SysFont("Consolas", 24, bold = True)
+large_font = pgm.font.SysFont("Consolas", 36)
+
+#function to outputting text onto the screen
+def draw_text(text, font, text_col, x, y):
+    img = font.render(text, True, text_col)
+    screen.blit(img, (x, y))
+
 # audio
 # pgm.mixer.music.load(r"assets\audios\bgm.ogg")
 # pgm.mixer.music.play(-1)
@@ -83,6 +92,9 @@ def create_tower(mouse_pos):
         if space_is_free == True:
             new_tower = Tower(base_tower, tower_spritesheet, mouse_tile_x, mouse_tile_y)
             tower_groups.add(new_tower)
+            # deduct cost of tower
+            world.money -= val.BUY_COST
+
 
 def select_tower(mouse_pos):
     mouse_tile_x = mouse_pos[0] // val.TILE_SIZE
@@ -98,6 +110,7 @@ def clear_selection():
 # create world
 world = World(world_data, map_image)
 world.process_data()
+world.process_enemies()
 
 # creating groups
 monster_groups = pgm.sprite.Group()
@@ -120,7 +133,7 @@ while run:
     #########################
 
     #update groups
-    monster_groups.update()
+    monster_groups.update(world)
     tower_groups.update(monster_groups)
 
     #highlit selected turret
@@ -143,15 +156,14 @@ while run:
     #draw groups
     for tower in tower_groups:
         tower.draw(screen)
-        # # Draw tower base
-        # screen.blit(tower.base_tower, tower.base_rect)
-        # # Draw tower animation frame
-        # screen.blit(tower.image, tower.rect)
     
+    draw_text(str(world.health), text_font, "grey100", 0, 0)
+    draw_text(str(world.money), text_font, "grey100", 0, 30)
+
     # Spawn enemies
     if pgm.time.get_ticks() - last_enemy_spawn > val.SPAWN_COOLDOWN:
         if world.spawned_enemies < len(world.enemy_list):
-            enemy_type = bin.world.enemy_list[world.spawned_enemies]
+            enemy_type = world.enemy_list[world.spawned_enemies]
             monster = Monster(enemy_type, world.waypoints, monster_images)
             monster_groups.add(monster)
             world.spawned_enemies += 1
@@ -185,7 +197,9 @@ while run:
         # if a tower can be upgradede the nshow the upgrade buttons
         if selected_tower.upgrade_level < val.TOWER_LEVELS:
             if upgrade_button.draw(screen):
-                selected_tower.upgrade()
+                if world.money >= val.UPGRADE_COST :
+                    selected_tower.upgrade()
+                    world.money -= val.UPGRADE_COST
         
 
     #event handler
@@ -204,7 +218,9 @@ while run:
             selected_tower = False
             clear_selection()
             if placing_tower == True:
-                create_tower(mouse_pos)
+                # cek apakah uang cukup buat  beli tower
+                if world.money >= val.BUY_COST:
+                    create_tower(mouse_pos)
             else:
                 selected_tower = select_tower(mouse_pos)
          
