@@ -5,12 +5,13 @@ from . import globalvar as val
 
 
 class Tower(pgm.sprite.Sprite):
-    def __init__(self, base_tower, sprite_sheet, tile_x, tile_y):
+    def __init__(self, base_tower, sprite_sheets, tile_x, tile_y):
         pgm.sprite.Sprite.__init__(self)
 
         # variables
-        self.range = 140
-        self.cooldown = 1500
+        self.upgrade_level = 1
+        self.range = val.TOWER_DATA[self.upgrade_level - 1].get("range")
+        self.cooldown = val.TOWER_DATA[self.upgrade_level - 1].get("cooldown")
         self.last_frame = pgm.time.get_ticks()
         self.selected = False
         self.target = None
@@ -29,8 +30,8 @@ class Tower(pgm.sprite.Sprite):
         self.base_rect.center = (self.x, self.y)
 
         # animation frame variable
-        self.sprite_sheet = sprite_sheet
-        self.animation_frames = self.load_images()
+        self.sprite_sheets = sprite_sheets
+        self.animation_frames = self.load_images(self.sprite_sheets[self.upgrade_level - 1])
         self.frame_index = 0
         self.update_time = pgm.time.get_ticks()
 
@@ -49,14 +50,13 @@ class Tower(pgm.sprite.Sprite):
         self.range_image.set_alpha(100)
         self.range_rect = self.range_image.get_rect()
         self.range_rect.center = self.rect.center
-
         
-    def load_images(self):
+    def load_images(self, sprite_sheet):
         # extracting image from sprite sheet
-        size = self.sprite_sheet.get_height()
+        size = sprite_sheet.get_height()
         animation_frames = []
         for x in range(val.ANIMATION_STEPS):
-            temp_frames = self.sprite_sheet.subsurface(x * size, 0, size, size)
+            temp_frames = sprite_sheet.subsurface(x * size, 0, size, size)
             animation_frames.append(temp_frames)
         return animation_frames
     
@@ -100,6 +100,24 @@ class Tower(pgm.sprite.Sprite):
                 self.last_frame = pgm.time.get_ticks()
                 self.target = None
 
+    def upgrade(self):
+        self.upgrade_level += 1
+        self.range = val.TOWER_DATA[self.upgrade_level - 1].get("range")
+        self.cooldown = val.TOWER_DATA[self.upgrade_level - 1].get("cooldown")
+
+        #upgrade tower images
+        self.animation_frames = self.load_images(self.sprite_sheets[self.upgrade_level - 1])
+        self.original_image = self.animation_frames[self.frame_index]
+
+        #upgrade transparent circle showing range
+        self.range_image = pgm.Surface((self.range * 2, self. range * 2))
+        self.range_image.fill((0, 0, 0))
+        self.range_image.set_colorkey((0, 0, 0))
+        pgm.draw.circle(self.range_image, "grey100",(self.range, self.range), self.range)
+        self.range_image.set_alpha(100)
+        self.range_rect = self.range_image.get_rect()
+        self.range_rect.center = self.rect.center
+
     def draw(self, surface):
         self.image = pgm.transform.rotate(self.original_image, self.angle - 90)
         self.rect = self.image.get_rect()
@@ -108,6 +126,4 @@ class Tower(pgm.sprite.Sprite):
         surface.blit(self.image, self.rect)
         if self.selected:
             surface.blit(self.range_image, self.range_rect)
-        
-    def rotate(self):
-        pass
+    

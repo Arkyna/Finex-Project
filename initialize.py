@@ -27,7 +27,10 @@ selected_tower = None
 map_image = pgm.image.load(r'assets\images\map\level1.png').convert_alpha()
 
 # tower sprite sheet
-tower_sheet = pgm.image.load(r'assets\images\towers\weapon_heavy_arrow.png').convert_alpha()
+tower_spritesheet = []
+for x in range(1, val.TOWER_LEVELS + 1):
+    tower_sheet = pgm.image.load(rf'assets\images\towers\weapon_heavy_arrow_{x}.png').convert_alpha()
+    tower_spritesheet.append(tower_sheet)
 
 # tower sprite below tower sheet
 base_tower = pgm.image.load(r'assets\images\towers\tower1.png').convert_alpha()
@@ -41,6 +44,7 @@ monster_image = pgm.image.load(r'assets\images\monsters\enemy1.png').convert_alp
 # buttons
 buy_tower_image = pgm.image.load(r'assets\images\buttons\buy_button.png').convert_alpha()
 cancel_button_image = pgm.image.load(r'assets\images\buttons\cancel_button.png').convert_alpha()
+upgrade_button_image = pgm.image.load(r'assets\images\buttons\upgrade.png').convert_alpha()
 
 # sidebar 
 sidebar_image = pgm.image.load(r'assets\images\gui\sidepanel.png').convert_alpha()
@@ -71,7 +75,7 @@ def create_tower(mouse_pos):
                 space_is_free = False
         # if free then place tower
         if space_is_free == True:
-            new_tower = Tower(base_tower, tower_sheet, mouse_tile_x, mouse_tile_y)
+            new_tower = Tower(base_tower, tower_spritesheet, mouse_tile_x, mouse_tile_y)
             tower_groups.add(new_tower)
 
 def select_tower(mouse_pos):
@@ -100,6 +104,7 @@ monster_groups.add(monster)
 # create button
 tower_button = Button(val.SCREEN_WIDTH + 30, 120, buy_tower_image, True)
 cancel_button = Button(val.SCREEN_WIDTH + 30, 180, cancel_button_image, True)
+upgrade_button = Button(val.SCREEN_WIDTH + 30, 120, upgrade_button_image, True)
 
 # game loop
 run = True
@@ -163,6 +168,14 @@ while run:
         if cancel_button.draw(screen):
             placing_tower = False
             #print(tower_groups)
+
+    # if a tower is selected, then show the upgrade buttons
+    if selected_tower:
+        # if a tower can be upgradede the nshow the upgrade buttons
+        if selected_tower.upgrade_level < val.TOWER_LEVELS:
+            if upgrade_button.draw(screen):
+                selected_tower.upgrade()
+        
 
     #event handler
     for event in pgm.event.get():

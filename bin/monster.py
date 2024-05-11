@@ -1,6 +1,7 @@
 import pygame as pgm
 from pygame.math import Vector2
 import math
+from . import globalvar as val
 
 class Monster(pgm.sprite.Sprite):
     def __init__(self, waypoints, image):
@@ -8,7 +9,7 @@ class Monster(pgm.sprite.Sprite):
         self.waypoints = waypoints
         self.pos = Vector2(self.waypoints[0])
         self.target_waypoint = 1
-        self.speed = 3.5
+        self.speed = val.SPEED
         self.angle = 0
         self.original_image = image
         self.image = pgm.transform.rotate(self.original_image, self.angle)
