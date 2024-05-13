@@ -82,7 +82,7 @@ def draw_text(text, font, text_col, x, y):
     img = font.render(text, True, text_col)
     screen.blit(img, (x, y))
 
-# audio
+# audio disabled temporarily
 # pgm.mixer.music.load(r"assets/audios/bgm2.mp3")
 # pgm.mixer.music.play(-1)
 
