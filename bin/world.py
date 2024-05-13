@@ -1,11 +1,11 @@
 import pygame as pgm
 import random
 import bin.globalvar as val
-from bin.enemy_data import ENEMY_SPAWN_DATA
 
 class World():
     def __init__(self, data, map_image):
         self.level = 1
+        self.game_speed = 1
         self.health = val.HEALTH
         self.money = val.MONEY
         self.tile_map = []
@@ -14,6 +14,8 @@ class World():
         self.image = map_image
         self.enemy_list = []
         self.spawned_enemies = 0
+        self.killed_enemies = 0
+        self.missed_enemies = 0
 
 
     def process_data(self):
@@ -35,7 +37,7 @@ class World():
             self.waypoints.append((temp_x, temp_y))
 
     def process_enemies(self):
-        enemies = ENEMY_SPAWN_DATA[self.level -1]
+        enemies = val.ENEMY_SPAWN_DATA[self.level -1]
         for enemy_type in enemies :
             enemies_to_spawn = enemies[enemy_type]
             for enemy in range(enemies_to_spawn):
@@ -43,6 +45,18 @@ class World():
         
         #randomize the list to shuffle the enemies
         random.shuffle(self.enemy_list)
+
+    def check_level_complete(self):
+        if(self.killed_enemies + self.missed_enemies) == len(self.enemy_list):
+            return True
+    
+    def reset_level(self):
+        #reset enemy variables
+        self.enemy_list = []
+        self.spawned_enemies = 0
+        self.killed_enemies = 0
+        self.missed_enemies = 0
+
 
     def draw(self, surface):
         surface.blit(self.image, (0, 0))

@@ -1,7 +1,6 @@
 import pygame as pgm
 from pygame.math import Vector2
 import math
-from bin.enemy_data import ENEMY_DATA
 from . import globalvar as val
 
 class Monster(pgm.sprite.Sprite):
@@ -10,8 +9,8 @@ class Monster(pgm.sprite.Sprite):
         self.waypoints = waypoints
         self.pos = Vector2(self.waypoints[0])
         self.target_waypoint = 1
-        self.health = ENEMY_DATA.get(enemy_type)["health"]
-        self.speed = ENEMY_DATA.get(enemy_type)["speed"]
+        self.health = val.ENEMY_DATA.get(enemy_type)["health"]
+        self.speed = val.ENEMY_DATA.get(enemy_type)["speed"]
         self.angle = 0
         self.original_image = images.get(enemy_type)
         self.image = pgm.transform.rotate(self.original_image, self.angle)
@@ -25,7 +24,6 @@ class Monster(pgm.sprite.Sprite):
 
     def move(self, world):
         #defining target waypoint
-
         if self.target_waypoint < len(self.waypoints):     
             self.target = Vector2(self.waypoints[self.target_waypoint])
             self.movement = self.target - self.pos
@@ -33,14 +31,15 @@ class Monster(pgm.sprite.Sprite):
             #enemy reached the end of the path
             self.kill()
             world.health -= 1
+            world.missed_enemies += 1
             
 
         #calculating distance to target
         dist = self.movement.length()
 
         #check if remaining distance is greater than the enemy speed
-        if dist >= self.speed:
-            self.pos += self.movement.normalize() * self.speed
+        if dist >= (self.speed * world.game_speed):
+            self.pos += self.movement.normalize() * (self.speed * world.game_speed)
         else:
             if dist != 0:
                 self.pos += self.movement.normalize() * dist
@@ -58,5 +57,6 @@ class Monster(pgm.sprite.Sprite):
 
     def check_alive(self, world):
         if self.health <= 0:
+            world.killed_enemies += 1
             world.money += val.KILL_REWARD
             self.kill()
