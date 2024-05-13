@@ -61,13 +61,13 @@ class Tower(pgm.sprite.Sprite):
             animation_frames.append(temp_frames)
         return animation_frames
     
-    def update(self, monster_groups):
+    def update(self, monster_groups, world):
         #if target picked, play firing animation
         if self.target:
             self.play_animation()
         else:
         #search for new target once tower has cooled down
-            if pgm.time.get_ticks() - self.last_frame > self.cooldown:
+            if pgm.time.get_ticks() - self.last_frame > (self.cooldown / world.game_speed):
                 self.pick_target(monster_groups)
 
     def pick_target(self, monster_groups):

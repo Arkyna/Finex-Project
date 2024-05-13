@@ -12,7 +12,7 @@ FPS = 60
 HEALTH = 1
 MONEY = 1000
 LEVEL_COMPLETE_REWARD = 100
-TOTAL_LEVELS = 1
+TOTAL_LEVELS = 0
 
 #######################
 # Tower's Constants
@@ -54,7 +54,7 @@ KILL_REWARD = 100
 ENEMY_SPAWN_DATA = [
   {
     #1
-    "weak": 1,
+    "weak": 5,
     "medium": 1,
     "strong": 0,
     "elite": 0

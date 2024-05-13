@@ -57,9 +57,8 @@ upgrade_button_image = pgm.image.load('assets/images/buttons/upgrade.png').conve
 begin_image = pgm.image.load('assets/images/buttons/begin.png').convert_alpha()
 restart_image = pgm.image.load('assets/images/buttons/restart.png').convert_alpha()
 fforward_image = pgm.image.load('assets/images/buttons/fast_forward.png').convert_alpha()# sidebar 
-
-
 sidebar_image = pgm.image.load('assets/images/gui/sidepanel.png').convert_alpha()
+flat_back_image = pgm.image.load('assets/images/gui/flatbg_480x192.png').convert_alpha()
 
 # load json data for monster path in levels
 with open(r'bin/levels/level1.tmj') as file:
@@ -68,6 +67,15 @@ with open(r'bin/levels/level1.tmj') as file:
 #load fonts for displaying text on the screen
 text_font = pgm.font.SysFont("Consolas", 24, bold = True)
 large_font = pgm.font.SysFont("Consolas", 36)
+
+def display_data():
+    screen.blit(sidebar_image,(val.SCREEN_WIDTH, 0))
+    """ FOR HEALTH ICON DISPLAY """
+    draw_text(str(world.health), text_font, "grey100", val.SCREEN_WIDTH + 20, 20)
+    """ FOR MONEY ICON DISPLAY """
+    draw_text(str(world.money), text_font, "grey100", val.SCREEN_WIDTH + 20, 50)
+    """ FOR MONEY ICON DISPLAY """
+    draw_text(str(world.level), text_font, "grey100", val.SCREEN_WIDTH + 20, 80)
 
 #function to outputting text onto the screen
 def draw_text(text, font, text_col, x, y):
@@ -124,11 +132,11 @@ tower_groups = pgm.sprite.Group()
 
 # create button
 tower_button = Button(val.SCREEN_WIDTH + 30, 120, buy_tower_image, True)
-cancel_button = Button(val.SCREEN_WIDTH + 30, 180, cancel_button_image, True)
-upgrade_button = Button(val.SCREEN_WIDTH + 30, 120, upgrade_button_image, True)
-begin_button = Button(val.SCREEN_WIDTH + 30, 240, begin_image, True)
-restart_button = Button(val.SCREEN_WIDTH + 30, 280, restart_image, True)
-fforward_button = Button(val.SCREEN_WIDTH + 30, 320, fforward_image, False)
+cancel_button = Button(val.SCREEN_WIDTH + 30, 240, cancel_button_image, True)
+upgrade_button = Button(val.SCREEN_WIDTH + 30, 200, upgrade_button_image, True)
+begin_button = Button(val.SCREEN_WIDTH + 30, 320, begin_image, True)
+restart_button = Button(val.SCREEN_WIDTH + 30, 360, restart_image, True)
+fforward_button = Button(val.SCREEN_WIDTH + 30, 400, fforward_image, False)
 
 # game loop
 run = True
@@ -153,7 +161,7 @@ while run:
 
         #update groups
         monster_groups.update(world)
-        tower_groups.update(monster_groups)
+        tower_groups.update(monster_groups, world)
 
         #highlit selected turret
         if selected_tower:
@@ -164,8 +172,8 @@ while run:
     # MIND THE DRAW ORDER!!!
     #########################
 
-    #screen fill
-    screen.fill("grey100")
+    # screen fill ## LEGACY FILLER
+    # screen.fill("grey100")
 
     #draw level
     world.draw(screen)
@@ -173,18 +181,13 @@ while run:
     #monster path
     pgm.draw.lines(screen, "grey0", False, world.waypoints)
 
-    #draw sidebar
-    screen.blit(sidebar_image,(960, 0))
-
     #draw groups
     monster_groups.draw(screen)
     # tower_groups.draw(screen) ## this is old syntax
     for tower in tower_groups:
         tower.draw(screen)
     
-    draw_text(str(world.health), text_font, "grey100", 990, 20)
-    draw_text(str(world.money), text_font, "grey100", 990, 50)
-    draw_text(str(world.level), text_font, "grey100", 990, 80)
+    display_data()
 
     if game_over == False:
         # cek if the level has been started or not
@@ -218,6 +221,8 @@ while run:
 
         #draw buttons
         #button for placing tower
+        #for tower button show the cost
+        draw_text(str(val.BUY_COST), text_font, "grey100", val.SCREEN_WIDTH + 160, 125)
         if tower_button.draw(screen):
             placing_tower = True
         # if placing then show the cancel button
@@ -240,11 +245,11 @@ while run:
                         selected_tower.upgrade()
                         world.money -= val.UPGRADE_COST
     else:
-        pgm.draw.rect(screen, "dodgerblue", (200, 200, 400, 200), border_radius = 30)
+        screen.blit(flat_back_image,(240, 384))
         if game_outcome == -1:
-            draw_text("GAME OVER", large_font, "grey0", 310, 230)
+            draw_text("GAME OVER", large_font, "grey0", 400, 400)
         elif game_outcome == 1:
-            draw_text("YOU WIN?", large_font, "grey0", 315, 230)
+            draw_text("YOU WIN?", large_font, "grey0", 400, 400)
         # restart the level
         if restart_button.draw(screen):
             game_over = False
