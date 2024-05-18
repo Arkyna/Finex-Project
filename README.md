@@ -1,7 +1,6 @@
 
 # Sentinel Siege
-Sentinel Siege adalah permainan Tower Defense Game yang memiliki tema Medieval dan menggunakan Pixel Art agar lebih mudah di jalankan di laptop kentang
-
+Sentinel Siege adalah permainan Tower Defense Game yang memiliki tema Medieval
 
 
 ## Kelompok OkSobatKoding

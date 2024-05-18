@@ -16,6 +16,7 @@ class Tower(pgm.sprite.Sprite):
         self.selected = False
         self.target = None
 
+
         # position var
         self.tile_x = tile_x
         self.tile_y = tile_y
@@ -60,13 +61,13 @@ class Tower(pgm.sprite.Sprite):
             animation_frames.append(temp_frames)
         return animation_frames
     
-    def update(self, monster_groups):
+    def update(self, monster_groups, world):
         #if target picked, play firing animation
         if self.target:
             self.play_animation()
         else:
         #search for new target once tower has cooled down
-            if pgm.time.get_ticks() - self.last_frame > self.cooldown:
+            if pgm.time.get_ticks() - self.last_frame > (self.cooldown / world.game_speed):
                 self.pick_target(monster_groups)
 
     def pick_target(self, monster_groups):
@@ -76,13 +77,15 @@ class Tower(pgm.sprite.Sprite):
 
         #check distance to each enemy that in range
         for monster in monster_groups:
-            x_dist = monster.pos[0] - self.x
-            y_dist = monster.pos[1] - self.y
-            dist = math.sqrt(x_dist **2 + y_dist ** 2)
-            if dist < self.range:
-                self.target = monster
-                self.angle = math.degrees(math.atan2(-y_dist, x_dist))
-                # print("Target selected")
+            if monster.health > 0:
+                x_dist = monster.pos[0] - self.x
+                y_dist = monster.pos[1] - self.y
+                dist = math.sqrt(x_dist **2 + y_dist ** 2)
+                if dist < self.range:
+                    self.target = monster
+                    self.angle = math.degrees(math.atan2(-y_dist, x_dist))
+                    self.target.health -= val.DAMAGE
+                    break
     
     def play_animation(self):
         #updating image
