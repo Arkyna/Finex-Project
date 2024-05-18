@@ -19,7 +19,8 @@ font = pygame.font.SysFont("arialblack", 40)
 small_font = pygame.font.SysFont("arial", 20)  # Font baru untuk teks tambahan
 
 # define colours
-TEXT_COL = (255, 255, 255)
+TEXT_COL = (255, 255, 255)  # White color for text
+BLACK_TEXT_COL = (0, 0, 0)  # Red color for better visibility
 
 # load button images
 resume_img = pygame.image.load("assets/images/buttons/begin.png").convert_alpha()
@@ -53,9 +54,8 @@ while run:
     if game_paused:
         # check menu state
         if menu_state == "main":
-            draw_text("Main Menu", font, TEXT_COL, 325, 50)  # Menambahkan teks "Main Menu" di atas wlcm_img
-            draw_text("Selamat Datang!", small_font, TEXT_COL, 325, 70)  # Menampilkan teks di atas wlcm_img
-            wlcm_button.draw(screen)
+            wlcm_button.draw(screen)  # Menggambar wlcm_img terlebih dahulu
+            draw_text("Main Menu", font, BLACK_TEXT_COL, 460, 120)  # Menambahkan teks "Main Menu" di atas wlcm_img dengan warna HITAM LEGAM AMBATUKAM
             draw_additional_text()  # Memanggil fungsi untuk menampilkan teks tambahan
             # draw pause screen buttons
             if resume_button.draw(screen):
@@ -86,3 +86,4 @@ while run:
     pygame.display.update()
 
 pygame.quit()
+           
