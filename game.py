@@ -1,3 +1,4 @@
+import os
 import pygame as pgm
 import json
 from bin import globalvar as val
@@ -5,6 +6,9 @@ from bin.monster import Monster
 from bin.world import World
 from bin.button import Button
 from bin.towers.tower1 import FirstTower
+
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 
 class Game:
     def __init__(self):
