@@ -44,10 +44,10 @@ cursor_tower = pgm.image.load(r'assets/images/towers/tower1.png').convert_alpha(
 
 # enemies
 monster_images = {
-    "weak": pgm.image.load(r'assets/images/monsters/enemy1.png').convert_alpha(),
-    "medium": pgm.image.load(r'assets/images/monsters/enemy2.png').convert_alpha(),
-    "strong": pgm.image.load(r'assets/images/monsters/enemy3.png').convert_alpha(),
-    "elite": pgm.image.load(r'assets/images/monsters/enemy4.png').convert_alpha()
+    "weak": pgm.image.load('assets/images/monsters/enemy1.png').convert_alpha(),
+    "medium": pgm.image.load('assets/images/monsters/enemy2.png').convert_alpha(),
+    "strong": pgm.image.load('assets/images/monsters/enemy3.png').convert_alpha(),
+    "elite": pgm.image.load('assets/images/monsters/enemy4.png').convert_alpha()
 }
 
 # buttons
