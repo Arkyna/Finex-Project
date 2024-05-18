@@ -20,8 +20,8 @@ class Game:
     def load_assets(self):
         self.map_image = pgm.image.load('assets/images/map/level1.png').convert_alpha()
         self.tower_spritesheet = [pgm.image.load(f'assets/images/towers/weapon_heavy_arrow_{x}.png').convert_alpha() for x in range(1, val.TOWER_LEVELS + 1)]
-        self.base_tower = pgm.image.load(r'assets/images/towers/tower1.png').convert_alpha()
-        self.cursor_tower = pgm.image.load(r'assets/images/towers/tower1.png').convert_alpha()
+        self.base_tower = pgm.image.load(r'assets/images/towers/ABC_tower.png').convert_alpha()
+        self.cursor_tower = pgm.image.load(r'assets/images/towers/cursor_tower.png').convert_alpha()
         self.monster_images = {
             "weak": pgm.image.load(r'assets/images/monsters/enemy1.png').convert_alpha(),
             "medium": pgm.image.load(r'assets/images/monsters/enemy2.png').convert_alpha(),
@@ -40,7 +40,7 @@ class Game:
         self.large_font = pgm.font.SysFont("Consolas", 36)
 
     def load_world(self):
-        with open(r'bin/levels/level1.tmj') as file:
+        with open('bin/levels/level1.tmj') as file:
             world_data = json.load(file)
         self.world = World(world_data, self.map_image)
         self.world.process_data()
