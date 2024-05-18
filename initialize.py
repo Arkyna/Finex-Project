@@ -4,7 +4,7 @@ from bin import globalvar as val
 from bin.monster import Monster
 from bin.world import World
 from bin.button import Button
-from bin.tower import Tower
+from bin.towers.tower import Tower
 
 # initialisasi
 pgm.init()

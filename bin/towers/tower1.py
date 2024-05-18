@@ -1,10 +1,10 @@
-import pygame as pgm
-from . import tower as Tower
-import math
-from . import globalvar as val
 from typing import Any, List
+import pygame as pgm
+import math
+from .. import globalvar as val
+from .tower import Tower  # Import the base Tower class
 
-class Tower(Tower):
+class FirstTower(Tower):
     def load_images(self, sprite_sheet) -> List[Any]:
         size = sprite_sheet.get_height()
         animation_frames = []

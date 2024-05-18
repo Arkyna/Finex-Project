@@ -4,7 +4,7 @@ from bin import globalvar as val
 from bin.monster import Monster
 from bin.world import World
 from bin.button import Button
-from bin.tower import Tower
+from bin.towers.tower1 import FirstTower
 
 class Game:
     def __init__(self):
@@ -97,7 +97,7 @@ class Game:
         mouse_tile_num = (mouse_tile_y * val.COLS) + mouse_tile_x
         if self.world.tile_map[mouse_tile_num] == 74:
             if not any((mouse_tile_x, mouse_tile_y) == (tower.tile_x, tower.tile_y) for tower in self.tower_groups):
-                new_tower = Tower(self.base_tower, self.tower_spritesheet, mouse_tile_x, mouse_tile_y)
+                new_tower = FirstTower(self.base_tower, self.tower_spritesheet, mouse_tile_x, mouse_tile_y)
                 self.tower_groups.add(new_tower)
                 self.world.money -= val.BUY_COST
 
