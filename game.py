@@ -1,10 +1,14 @@
+import os
 import pygame as pgm
 import json
 from bin import globalvar as val
 from bin.monster import Monster
 from bin.world import World
 from bin.button import Button
-from bin.tower import Tower
+from bin.towers.tower1 import FirstTower
+
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 
 class Game:
     def __init__(self):
@@ -20,8 +24,8 @@ class Game:
     def load_assets(self):
         self.map_image = pgm.image.load('assets/images/map/level1.png').convert_alpha()
         self.tower_spritesheet = [pgm.image.load(f'assets/images/towers/weapon_heavy_arrow_{x}.png').convert_alpha() for x in range(1, val.TOWER_LEVELS + 1)]
-        self.base_tower = pgm.image.load(r'assets/images/towers/tower1.png').convert_alpha()
-        self.cursor_tower = pgm.image.load(r'assets/images/towers/tower1.png').convert_alpha()
+        self.base_tower = pgm.image.load(r'assets/images/towers/ABC_tower.png').convert_alpha()
+        self.cursor_tower = pgm.image.load(r'assets/images/towers/cursor_tower.png').convert_alpha()
         self.monster_images = {
             "weak": pgm.image.load(r'assets/images/monsters/enemy1.png').convert_alpha(),
             "medium": pgm.image.load(r'assets/images/monsters/enemy2.png').convert_alpha(),
@@ -40,7 +44,7 @@ class Game:
         self.large_font = pgm.font.SysFont("Consolas", 36)
 
     def load_world(self):
-        with open(r'bin/levels/level1.tmj') as file:
+        with open('bin/levels/level1.tmj') as file:
             world_data = json.load(file)
         self.world = World(world_data, self.map_image)
         self.world.process_data()
@@ -97,7 +101,7 @@ class Game:
         mouse_tile_num = (mouse_tile_y * val.COLS) + mouse_tile_x
         if self.world.tile_map[mouse_tile_num] == 74:
             if not any((mouse_tile_x, mouse_tile_y) == (tower.tile_x, tower.tile_y) for tower in self.tower_groups):
-                new_tower = Tower(self.base_tower, self.tower_spritesheet, mouse_tile_x, mouse_tile_y)
+                new_tower = FirstTower(self.base_tower, self.tower_spritesheet, mouse_tile_x, mouse_tile_y)
                 self.tower_groups.add(new_tower)
                 self.world.money -= val.BUY_COST
 

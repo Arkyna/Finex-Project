@@ -1,7 +1,7 @@
 import pygame
 from bin import button
 from bin import globalvar as val
-from Init_eric import Game
+from game import Game
 import os
 import sys
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
