@@ -10,10 +10,8 @@ from bin.towers.tower1 import FirstTower
 class Game:
     def __init__(self):
         pgm.init()
-        SCREEN_WIDTH = 1160
-        SCREEN_HEIGHT = 960
         self.clock = pgm.time.Clock()
-        self.screen = pgm.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        self.screen = pgm.display.set_mode((val.SCREEN_WIDTH, val.SCREEN_HEIGHT))
         pgm.display.set_caption(val.GAME_NAME)
         self.load_assets()
         self.load_world()
@@ -61,12 +59,16 @@ class Game:
         self.create_buttons()
 
     def create_buttons(self):
-        self.tower_button = Button(val.SCREEN_WIDTH + 30, 120, self.buy_tower_image, True)
-        self.cancel_button = Button(val.SCREEN_WIDTH + 30, 240, self.cancel_button_image, True)
-        self.upgrade_button = Button(val.SCREEN_WIDTH + 30, 200, self.upgrade_button_image, True)
-        self.begin_button = Button(val.SCREEN_WIDTH + 30, 320, self.begin_image, True)
-        self.restart_button = Button(val.SCREEN_WIDTH + 30, 360, self.restart_image, True)
-        self.fforward_button = Button(val.SCREEN_WIDTH + 30, 400, self.fforward_image, False)
+        self.tower_button = Button(990, 120, self.buy_tower_image, True)
+        self.cancel_button = Button(990, 240, self.cancel_button_image, True)
+        self.upgrade_button = Button(990, 200, self.upgrade_button_image, True)
+        self.begin_button = Button(990, 320, self.begin_image, True)
+        self.restart_button = Button(990, 360, self.restart_image, True)
+        self.fforward_button = Button(990, 400, self.fforward_image, False)
+
+        '''dynammically reposition the buttons use the widht of the screen and calculate it from that numbers
+        examples *formula = (screen widht) - (screen width-position)* for the button position it should automaitcally reposition itself
+        this is random trivia'''
 
     def run(self):
         while True:
@@ -85,7 +87,7 @@ class Game:
                 self.handle_mouse_click(pgm.mouse.get_pos())
 
     def handle_mouse_click(self, mouse_pos):
-        if mouse_pos[0] < val.SCREEN_WIDTH and mouse_pos[1] < val.SCREEN_HEIGHT:
+        if mouse_pos[0] < 960 and mouse_pos[1] < val.SCREEN_HEIGHT:
             self.selected_tower = False
             self.clear_selection()
             if self.placing_tower:
@@ -171,14 +173,14 @@ class Game:
         pgm.display.flip()
 
     def draw_buttons(self):
-        self.draw_text(str(val.BUY_COST), self.text_font, "grey100", val.SCREEN_WIDTH + 160, 125)
+        self.draw_text(str(val.BUY_COST), self.text_font, "grey100", 1120, 125)
         if self.tower_button.draw(self.screen):
             self.placing_tower = True
         if self.placing_tower:
             cursor_rect = self.cursor_tower.get_rect()
             cursor_pos = pgm.mouse.get_pos()
             cursor_rect.center = cursor_pos
-            if cursor_pos[0] <= val.SCREEN_WIDTH:
+            if cursor_pos[0] <= 960:
                 self.screen.blit(self.cursor_tower, cursor_rect)
             if self.cancel_button.draw(self.screen):
                 self.placing_tower = False
@@ -204,10 +206,10 @@ class Game:
         self.tower_groups.empty()
 
     def display_data(self):
-        self.screen.blit(self.sidebar_image, (val.SCREEN_WIDTH, 0))
-        self.draw_text(str(self.world.health), self.text_font, "grey100", val.SCREEN_WIDTH + 20, 20)
-        self.draw_text(str(self.world.money), self.text_font, "grey100", val.SCREEN_WIDTH + 20, 50)
-        self.draw_text(str(self.world.level), self.text_font, "grey100", val.SCREEN_WIDTH + 20, 80)
+        self.screen.blit(self.sidebar_image, (960, 0))
+        self.draw_text(str(self.world.health), self.text_font, "grey100", 980, 20)
+        self.draw_text(str(self.world.money), self.text_font, "grey100", 980, 50)
+        self.draw_text(str(self.world.level), self.text_font, "grey100", 980, 80)
 
     def draw_text(self, text, font, text_col, x, y):
         img = font.render(text, True, text_col)
