@@ -1,6 +1,5 @@
 import pygame
 from bin import button
-from bin import globalvar as val
 from game import Game
 
 class MainMenu:
