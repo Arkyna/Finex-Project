@@ -4,7 +4,7 @@ import math
 from .. import globalvar as val
 from .tower import Tower  # Import the base Tower class
 
-class FirstTower(Tower):
+class DefaultTower(Tower):
     def load_images(self, sprite_sheet) -> List[Any]:
         size = sprite_sheet.get_height()
         animation_frames = []
