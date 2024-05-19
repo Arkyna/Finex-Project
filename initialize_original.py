@@ -1,7 +1,7 @@
 import pygame as pgm
 import json
 from bin import globalvar as val
-from bin.monster import Monster
+from bin.monsters.monster1 import BasicMonster
 from bin.world import World
 from bin.button import Button
 from bin.towers.tower import Tower
@@ -205,7 +205,7 @@ while run:
             if pgm.time.get_ticks() - last_enemy_spawn > val.SPAWN_COOLDOWN:
                 if world.spawned_enemies < len(world.enemy_list):
                     enemy_type = world.enemy_list[world.spawned_enemies]
-                    monster = Monster(enemy_type, world.waypoints, monster_images)
+                    monster = BasicMonster(enemy_type, world.waypoints, monster_images)
                     monster_groups.add(monster)
                     world.spawned_enemies += 1
                     last_enemy_spawn = pgm.time.get_ticks()

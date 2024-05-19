@@ -3,87 +3,91 @@ from bin import button
 from bin import globalvar as val
 from game import Game
 import os
-import sys
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
-pygame.init()
 
-screen = pygame.display.set_mode((val.SCREEN_WIDTH + val.SIDE_PANEL, val.SCREEN_HEIGHT))
-pygame.display.set_caption("Main Menu")
+class MainMenu:
+    def __init__(self, screen):
+        self.screen = screen
+        self.font = pygame.font.SysFont("arialblack", 40)
+        self.small_font = pygame.font.SysFont("arial", 20)
+        self.TEXT_COL = (255, 255, 255)
+        self.BLACK_TEXT_COL = (0, 0, 0)
+        self.load_images()
+        self.create_buttons()
 
-# game variables
-game_paused = False
-menu_state = "main"
+    def load_images(self):
+        self.resume_img = pygame.image.load("assets/images/buttons/begin.png").convert_alpha()
+        self.credit_img = pygame.image.load("assets/images/buttons/begin.png").convert_alpha()
+        self.quit_img = pygame.image.load("assets/images/main_menu/close_button.png").convert_alpha()
+        self.back_img = pygame.image.load('assets/images/buttons/cancel_button.png').convert_alpha()
+        self.wlcm_img = pygame.image.load('assets/images/main_menu/IRONY_TITLE_Large.png').convert_alpha()
 
-# define fonts
-font = pygame.font.SysFont("arialblack", 40)
-small_font = pygame.font.SysFont("arial", 20)  # Font baru untuk teks tambahan
+    def create_buttons(self):
+        self.resume_button = button.Button(515, 300, self.resume_img, 1)
+        self.credit_button = button.Button(515, 450, self.credit_img, 1)
+        self.quit_button = button.Button(925, 100, self.quit_img, 1)
+        self.back_button = button.Button(515, 550, self.back_img, 1)
+        self.wlcm_button = button.Button(325, 100, self.wlcm_img, 1)
 
-# define colours
-TEXT_COL = (255, 255, 255)  # White color for text
-BLACK_TEXT_COL = (0, 0, 0)  # Red color for better visibility
+    def draw_text(self, text, font, text_col, x, y):
+        img = font.render(text, True, text_col)
+        self.screen.blit(img, (x, y))
 
-# load button images
-resume_img = pygame.image.load("assets/images/buttons/begin.png").convert_alpha()
-credit_img = pygame.image.load("assets/images/buttons/begin.png").convert_alpha()
-quit_img = pygame.image.load("assets/images/main_menu/close_button.png").convert_alpha()
-back_img = pygame.image.load('assets/images/buttons/cancel_button.png').convert_alpha()
-wlcm_img = pygame.image.load('assets/images/main_menu/IRONY_TITLE_Large.png').convert_alpha()
+    def draw_additional_text(self):
+        self.draw_text("Selamat Datang di sentinel siege!!", self.small_font, self.TEXT_COL, 100, 30)
+        self.draw_text("Pilih opsi di bawah untuk memulai atau keluar.", self.small_font, self.TEXT_COL, 100, 60)
 
-# create button instances
-resume_button = button.Button(515, 300, resume_img, 1)
-credit_button = button.Button(515, 450, credit_img, 1)
-quit_button = button.Button(925, 100, quit_img, 1)
-back_button = button.Button(515, 550, back_img, 1)
-wlcm_button = button.Button(325, 100, wlcm_img, 1)
-
-def draw_text(text, font, text_col, x, y):
-    img = font.render(text, True, text_col)
-    screen.blit(img, (x, y))
-
-# Teks tambahan di menu utama
-def draw_additional_text():
-    draw_text("Selamat Datang di sentinel siege!!", small_font, TEXT_COL, 100, 30)
-    draw_text("Pilih opsi di bawah untuk memulai atau keluar.", small_font, TEXT_COL, 100, 60)
-
-# game loop
-run = True
-while run:
-    screen.fill((52, 78, 91))
-
-    # check if game is paused
-    if game_paused:
-        # check menu state
+    def draw(self, menu_state):
+        self.screen.fill((52, 78, 91))
         if menu_state == "main":
-            wlcm_button.draw(screen)  # Menggambar wlcm_img terlebih dahulu
-            draw_text("Main Menu", font, BLACK_TEXT_COL, 460, 120)  # Menambahkan teks "Main Menu" di atas wlcm_img dengan warna HITAM LEGAM AMBATUKAM
-            draw_additional_text()  # Memanggil fungsi untuk menampilkan teks tambahan
-            # draw pause screen buttons
-            if resume_button.draw(screen):
-                game_paused = False
-                game_instance = Game()
-                game_instance.run()  # Memastikan game dijalankan
-            if credit_button.draw(screen):
-                menu_state = "credit"
-            if quit_button.draw(screen):
-                run = False
-        # check if the options menu is open
-        if menu_state == "credit":
-            # draw the different options buttons
-            if back_button.draw(screen):
-                menu_state = "main"
-    else:
-        draw_text("Tekan SPACE untuk jeda", font, TEXT_COL, 345, 420)
-        game_paused = True  # Menambahkan ini agar game langsung masuk ke menu utama
+            self.wlcm_button.draw(self.screen)
+            self.draw_text("Main Menu", self.font, self.BLACK_TEXT_COL, 460, 120)
+            self.draw_additional_text()
+            if self.resume_button.draw(self.screen):
+                return "resume"
+            if self.credit_button.draw(self.screen):
+                return "credit"
+            if self.quit_button.draw(self.screen):
+                return "quit"
+        elif menu_state == "credit":
+            if self.back_button.draw(self.screen):
+                return "main"
+        return menu_state
 
-    # event handler
-    for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                game_paused = True
-        if event.type == pygame.QUIT:
-            run = False
+class GameApp:
+    def __init__(self):
+        os.chdir(os.path.dirname(os.path.abspath(__file__)))
+        pygame.init()
+        self.screen = pygame.display.set_mode((val.SCREEN_WIDTH + val.SIDE_PANEL, val.SCREEN_HEIGHT))
+        pygame.display.set_caption("Main Menu")
+        self.menu = MainMenu(self.screen)
+        self.game_paused = False
+        self.menu_state = "main"
+        self.run_game()
 
-    pygame.display.update()
+    def run_game(self):
+        run = True
+        while run:
+            if self.game_paused:
+                self.menu_state = self.menu.draw(self.menu_state)
+                if self.menu_state == "resume":
+                    self.game_paused = False
+                    game_instance = Game()
+                    game_instance.run()
+                elif self.menu_state == "quit":
+                    run = False
+            else:
+                self.menu.draw_text("Tekan SPACE untuk jeda", self.menu.font, self.menu.TEXT_COL, 345, 420)
+                self.game_paused = True
 
-pygame.quit()
-           
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        self.game_paused = True
+                if event.type == pygame.QUIT:
+                    run = False
+
+            pygame.display.update()
+        pygame.quit()
+
+if __name__ == "__main__":
+    GameApp()
