@@ -4,20 +4,26 @@ from bin import globalvar as val
 from bin.monsters.monster1 import BasicMonster
 from bin.world import World
 from bin.button import Button
-from bin.towers.tower1 import FirstTower
+from bin.towers.tower1 import DefaultTower
 
-
+# The whole game initialization
 class Game:
     def __init__(self):
+        # initialize them all
         pgm.init()
+        # clock for the frame rate and time management
         self.clock = pgm.time.Clock()
+        # Game window size
         self.screen = pgm.display.set_mode((val.SCREEN_WIDTH, val.SCREEN_HEIGHT))
         pgm.display.set_caption(val.GAME_NAME)
+        # loading the needed methods for the game
         self.load_assets()
         self.load_world()
         self.setup_game_variables()
+        # calling the main loop of the game 
         self.run()
 
+    # Load the images and assets
     def load_assets(self):
         self.map_image = pgm.image.load('assets/images/map/level1.png').convert_alpha()
         self.tower_spritesheet = [pgm.image.load(f'assets/images/towers/weapon_heavy_arrow_{x}.png').convert_alpha() for x in range(1, val.TOWER_LEVELS + 1)]
@@ -40,11 +46,16 @@ class Game:
         self.text_font = pgm.font.SysFont("Consolas", 24, bold=True)
         self.large_font = pgm.font.SysFont("Consolas", 36)
 
+    # loading the world 
     def load_world(self):
+        # this JSON insist of world data, that contains path of the level, and we load it first
         with open('bin/levels/level1.tmj') as file:
             world_data = json.load(file)
+        # this is where world data meet the world/level image
         self.world = World(world_data, self.map_image)
+        # this is where we process the world data from the JSON that extracted in world.py
         self.world.process_data()
+        # this is where we load and process the enemies into the level
         self.world.process_enemies()
 
     def setup_game_variables(self):
@@ -58,6 +69,7 @@ class Game:
         self.tower_groups = pgm.sprite.Group()
         self.create_buttons()
 
+    # creating the buttons here and draw it on other methods
     def create_buttons(self):
         self.tower_button = Button(990, 120, self.buy_tower_image, True)
         self.cancel_button = Button(990, 240, self.cancel_button_image, True)
@@ -66,26 +78,35 @@ class Game:
         self.restart_button = Button(990, 360, self.restart_image, True)
         self.fforward_button = Button(990, 400, self.fforward_image, False)
 
-        '''dynammically reposition the buttons use the widht of the screen and calculate it from that numbers
+        '''dynammically reposition the buttons using the widht of the screen and calculate it from that numbers
         examples *formula = (screen widht) - (screen width-position)* for the button position it should automaitcally reposition itself
-        this is random trivia'''
+        this is just a random trivia'''
 
+    # the main loop
     def run(self):
         while True:
+            # fram limiter
             self.clock.tick(val.FPS)
+            # handling the events
             self.handle_events()
+            # updating the game logics for each frame
             self.update()
+            # drawing the elements on the screen
             self.draw()
 
+    # events handlers/controller
     def handle_events(self):
         for event in pgm.event.get():
             if event.type == pgm.QUIT:
+                # quitting the game if the windows is closed
                 pgm.quit()
                 exit()
 
+            # handling the right mouse button if clicked
             if event.type == pgm.MOUSEBUTTONDOWN and event.button == 1:
                 self.handle_mouse_click(pgm.mouse.get_pos())
-
+    
+    # handling the logic if the mouse is clicked, and determine if the tower is selected or to place a tower
     def handle_mouse_click(self, mouse_pos):
         if mouse_pos[0] < 960 and mouse_pos[1] < val.SCREEN_HEIGHT:
             self.selected_tower = False
@@ -96,16 +117,18 @@ class Game:
             else:
                 self.selected_tower = self.select_tower(mouse_pos)
 
+    # creating a new tower based on the mouse position and check if the money is enough/valid
     def create_tower(self, mouse_pos):
         mouse_tile_x = mouse_pos[0] // val.TILE_SIZE
         mouse_tile_y = mouse_pos[1] // val.TILE_SIZE
         mouse_tile_num = (mouse_tile_y * val.COLS) + mouse_tile_x
         if self.world.tile_map[mouse_tile_num] == 74:
             if not any((mouse_tile_x, mouse_tile_y) == (tower.tile_x, tower.tile_y) for tower in self.tower_groups):
-                new_tower = FirstTower(self.base_tower, self.tower_spritesheet, mouse_tile_x, mouse_tile_y)
+                new_tower = DefaultTower(self.base_tower, self.tower_spritesheet, mouse_tile_x, mouse_tile_y)
                 self.tower_groups.add(new_tower)
                 self.world.money -= val.BUY_COST
-
+    
+    # selecting an existing tower
     def select_tower(self, mouse_pos):
         mouse_tile_x = mouse_pos[0] // val.TILE_SIZE
         mouse_tile_y = mouse_pos[1] // val.TILE_SIZE
@@ -113,11 +136,13 @@ class Game:
             if (mouse_tile_x, mouse_tile_y) == (tower.tile_x, tower.tile_y):
                 return tower
 
+    # clearing selected tower
     def clear_selection(self):
         for tower in self.tower_groups:
             tower.selected = False
 
     def update(self):
+        # firstly checking the game state wheter its over or not
         if not self.game_over:
             self.check_game_outcome()
             self.monster_groups.update(self.world)
@@ -126,6 +151,7 @@ class Game:
                 self.selected_tower.selected = True
             if self.level_started:
                 self.world.game_speed = 1
+                # mechanics to the speeding game speed
                 if self.fforward_button.draw(self.screen):
                     self.world.game_speed = 2
                 if pgm.time.get_ticks() - self.last_enemy_spawn > val.SPAWN_COOLDOWN:
@@ -135,6 +161,7 @@ class Game:
                         self.monster_groups.add(monster)
                         self.world.spawned_enemies += 1
                         self.last_enemy_spawn = pgm.time.get_ticks()
+                # adding money, level, and resetting some variables if the level is completed
                 if self.world.check_level_complete():
                     self.world.money += val.LEVEL_COMPLETE_REWARD
                     self.world.level += 1
@@ -142,7 +169,8 @@ class Game:
                     self.last_enemy_spawn = pgm.time.get_ticks()
                     self.world.reset_level()
                     self.world.process_enemies()
-
+    
+    # checking the variables of the game state to determine the game over
     def check_game_outcome(self):
         if self.world.health <= 0:
             self.game_over = True
@@ -151,20 +179,27 @@ class Game:
             self.game_over = True
             self.game_outcome = 1
 
+    # drawing all the elements into the screen
     def draw(self):
         self.world.draw(self.screen)
-        pgm.draw.lines(self.screen, "grey0", False, self.world.waypoints)
+        # level path uncomment to enable the path drawing
+        #pgm.draw.lines(self.screen, "grey0", False, self.world.waypoints)
+        # drawing the monsters
         self.monster_groups.draw(self.screen)
+        # drawing each towers that in group
         for tower in self.tower_groups:
             tower.draw(self.screen)
+        # displaying the game's data, such as money, base health, and level
         self.display_data()
 
+        # draw the begin button if the game haven't started
         if not self.game_over:
             if not self.level_started:
                 if self.begin_button.draw(self.screen):
                     self.level_started = True
             self.draw_buttons()
         else:
+            # calling the game over screen, and resetting the level as the reset button is pressed, as the reset button is drawn on the screen
             self.screen.blit(self.flat_back_image, (240, 384))
             self.draw_game_over()
             if self.restart_button.draw(self.screen):
@@ -172,6 +207,7 @@ class Game:
 
         pgm.display.flip()
 
+    # drawing dat interactive buttons on the screen
     def draw_buttons(self):
         self.draw_text(str(val.BUY_COST), self.text_font, "grey100", 1120, 125)
         if self.tower_button.draw(self.screen):
@@ -192,9 +228,11 @@ class Game:
         if self.level_started:
                 self.fforward_button.draw(self.screen)
 
+    # drawing the game over and victory messages on the screen
     def draw_game_over(self):
         self.draw_text("GAME OVER" if self.game_outcome == -1 else "YOU WIN?", self.large_font, "grey0", 400, 400)
 
+    # methods to reset the game state
     def reset_game(self):
         self.game_over = False
         self.level_started = False
@@ -205,16 +243,18 @@ class Game:
         self.monster_groups.empty()
         self.tower_groups.empty()
 
+    # displaying the data of game such as healt, money, and current level
     def display_data(self):
         self.screen.blit(self.sidebar_image, (960, 0))
         self.draw_text(str(self.world.health), self.text_font, "grey100", 980, 20)
         self.draw_text(str(self.world.money), self.text_font, "grey100", 980, 50)
         self.draw_text(str(self.world.level), self.text_font, "grey100", 980, 80)
 
+    # text drawing
     def draw_text(self, text, font, text_col, x, y):
         img = font.render(text, True, text_col)
         self.screen.blit(img, (x, y))
 
-# uncomment the line below for running the game
+# uncomment the line below for running the game directly from this file
 if __name__ == "__main__":
     Game()
