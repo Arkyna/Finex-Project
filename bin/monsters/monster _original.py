@@ -1,7 +1,7 @@
 import pygame as pgm
 from pygame.math import Vector2
 import math
-from . import globalvar as val
+from .. import globalvar as val
 
 class Monster(pgm.sprite.Sprite):
     def __init__(self, enemy_type, waypoints, images):

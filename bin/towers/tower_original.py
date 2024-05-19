@@ -1,7 +1,7 @@
 from typing import Any
 import pygame as pgm
 import math
-from . import globalvar as val
+from .. import globalvar as val
 
 
 class Tower(pgm.sprite.Sprite):

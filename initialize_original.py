@@ -1,7 +1,7 @@
 import pygame as pgm
 import json
 from bin import globalvar as val
-from bin.monsters.monster1 import BasicMonster
+from bin.monsters.monster_type import BasicMonster
 from bin.world import World
 from bin.button import Button
 from bin.towers.tower import Tower

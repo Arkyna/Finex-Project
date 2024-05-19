@@ -54,9 +54,9 @@ KILL_REWARD = 100
 ENEMY_SPAWN_DATA = [
   {
     #1
-    "weak": 5,
+    "weak": 1,
     "medium": 1,
-    "strong": 0,
+    "strong": 1,
     "elite": 0
   },
   {

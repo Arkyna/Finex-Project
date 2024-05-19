@@ -23,10 +23,12 @@ class Monster(pgm.sprite.Sprite, ABC):
         self.rotate()
         self.check_alive(world)
 
+    # logics for following existing waypoints or path
     @abstractmethod
     def move(self, world):
         pass
 
+    # rotating the images 
     @abstractmethod
     def rotate(self):
         pass
