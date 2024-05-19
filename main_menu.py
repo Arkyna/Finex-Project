@@ -7,9 +7,9 @@ import os
 class MainMenu:
     def __init__(self, screen):
         self.screen = screen
-        self.font = pygame.font.SysFont("arialblack", 40)
-        self.small_font = pygame.font.SysFont("arial", 20)
-        self.TEXT_COL = (255, 255, 255)
+        self.font = pygame.font.Font("assets/font/buddychampion.ttf", 72)
+        self.small_font = pygame.font.Font("assets/font/buddychampionital.ttf", 40)
+        self.TEXT_COL = (0, 0, 0)
         self.BLACK_TEXT_COL = (0, 0, 0)
         self.load_images()
         self.create_buttons()
@@ -20,12 +20,13 @@ class MainMenu:
         self.quit_img = pygame.image.load("assets/images/main_menu/close_button.png").convert_alpha()
         self.back_img = pygame.image.load('assets/images/buttons/cancel_button.png').convert_alpha()
         self.wlcm_img = pygame.image.load('assets/images/main_menu/IRONY_TITLE_Large.png').convert_alpha()
+        self.credit_bg_img = pygame.image.load('assets/images/main_menu/UI_board_Large_parchment.png').convert_alpha()
 
     def create_buttons(self):
         self.resume_button = button.Button(515, 300, self.resume_img, 1)
         self.credit_button = button.Button(515, 450, self.credit_img, 1)
         self.quit_button = button.Button(925, 100, self.quit_img, 1)
-        self.back_button = button.Button(515, 550, self.back_img, 1)
+        self.back_button = button.Button(515, 660, self.back_img, 1)
         self.wlcm_button = button.Button(325, 100, self.wlcm_img, 1)
 
     def draw_text(self, text, font, text_col, x, y):
@@ -36,11 +37,23 @@ class MainMenu:
         self.draw_text("Selamat Datang di sentinel siege!!", self.small_font, self.TEXT_COL, 100, 30)
         self.draw_text("Pilih opsi di bawah untuk memulai atau keluar.", self.small_font, self.TEXT_COL, 100, 60)
 
+    def draw_credits(self):
+        self.screen.blit(self.credit_bg_img, (150, 100))  # Adjust the position as needed
+        self.draw_text("Credits", self.font, self.BLACK_TEXT_COL, 490, 140)
+        self.draw_text("Game Developer: OkSobatKoding", self.small_font, self.TEXT_COL, 180, 200)
+        self.draw_text("Designer: OkSobatKoding", self.small_font, self.TEXT_COL, 180, 240)
+        self.draw_text("Special Thanks To", self.font, self.BLACK_TEXT_COL, 330, 280)
+        self.draw_text("Music: OpenGameArt", self.small_font, self.TEXT_COL, 180, 340)
+        self.draw_text("GUI Assets: KanekiZLF from Itch.io ", self.small_font, self.TEXT_COL, 180, 380)
+        self.draw_text("Monster Assets: foozlecc from Itch.io ", self.small_font, self.TEXT_COL, 180, 420)
+        self.draw_text("Tower Assets: foozlecc from Itch.io ", self.small_font, self.TEXT_COL, 180, 460)
+        self.draw_text("Map Assets: foozlecc from Itch.io ", self.small_font, self.TEXT_COL, 180, 500)
+
     def draw(self, menu_state):
         self.screen.fill((52, 78, 91))
         if menu_state == "main":
             self.wlcm_button.draw(self.screen)
-            self.draw_text("Main Menu", self.font, self.BLACK_TEXT_COL, 460, 120)
+            self.draw_text("Main Menu", self.font, self.BLACK_TEXT_COL, 430, 120)
             self.draw_additional_text()
             if self.resume_button.draw(self.screen):
                 return "resume"
@@ -49,10 +62,10 @@ class MainMenu:
             if self.quit_button.draw(self.screen):
                 return "quit"
         elif menu_state == "credit":
+            self.draw_credits()
             if self.back_button.draw(self.screen):
                 return "main"
         return menu_state
-
 class GameApp:
     def __init__(self):
         os.chdir(os.path.dirname(os.path.abspath(__file__)))
