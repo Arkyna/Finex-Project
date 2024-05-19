@@ -1,4 +1,3 @@
-import os
 import pygame as pgm
 import json
 from bin import globalvar as val
@@ -7,14 +6,15 @@ from bin.world import World
 from bin.button import Button
 from bin.towers.tower1 import FirstTower
 
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
-
 
 class Game:
     def __init__(self):
         pgm.init()
+        SIDE_PANEL = 200
+        SCREEN_WIDTH = 960
+        SCREEN_HEIGHT = 960
         self.clock = pgm.time.Clock()
-        self.screen = pgm.display.set_mode((val.SCREEN_WIDTH + val.SIDE_PANEL, val.SCREEN_HEIGHT))
+        self.screen = pgm.display.set_mode((SCREEN_WIDTH + SIDE_PANEL, SCREEN_HEIGHT))
         pgm.display.set_caption(val.GAME_NAME)
         self.load_assets()
         self.load_world()
@@ -214,5 +214,6 @@ class Game:
         img = font.render(text, True, text_col)
         self.screen.blit(img, (x, y))
 
+# uncomment the line below for running the game
 if __name__ == "__main__":
     Game()

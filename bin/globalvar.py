@@ -12,7 +12,7 @@ FPS = 60
 HEALTH = 1
 MONEY = 1000
 LEVEL_COMPLETE_REWARD = 100
-TOTAL_LEVELS = 3
+TOTAL_LEVELS = 2
 
 #######################
 # Tower's Constants

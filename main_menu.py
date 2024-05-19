@@ -2,7 +2,6 @@ import pygame
 from bin import button
 from bin import globalvar as val
 from game import Game
-import os
 
 class MainMenu:
     def __init__(self, screen):
@@ -68,9 +67,10 @@ class MainMenu:
         return menu_state
 class GameApp:
     def __init__(self):
-        os.chdir(os.path.dirname(os.path.abspath(__file__)))
         pygame.init()
-        self.screen = pygame.display.set_mode((val.SCREEN_WIDTH + val.SIDE_PANEL, val.SCREEN_HEIGHT))
+        self._s_width = 960
+        self._s_height = 960
+        self.screen = pygame.display.set_mode((self._s_width , self._s_height))
         pygame.display.set_caption("Main Menu")
         self.menu = MainMenu(self.screen)
         self.game_paused = False
