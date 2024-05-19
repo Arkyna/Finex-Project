@@ -14,7 +14,7 @@ class MainMenu:
         self.create_buttons()
 
     def load_images(self):
-        self.resume_img = pygame.image.load("assets/images/buttons/begin.png").convert_alpha()
+        self.start_img = pygame.image.load("assets/images/buttons/begin.png").convert_alpha()
         self.credit_img = pygame.image.load("assets/images/buttons/begin.png").convert_alpha()
         self.quit_img = pygame.image.load("assets/images/main_menu/close_button.png").convert_alpha()
         self.back_img = pygame.image.load('assets/images/buttons/cancel_button.png').convert_alpha()
@@ -22,11 +22,11 @@ class MainMenu:
         self.credit_bg_img = pygame.image.load('assets/images/main_menu/UI_board_Large_parchment.png').convert_alpha()
 
     def create_buttons(self):
-        self.resume_button = button.Button(515, 300, self.resume_img, 1)
-        self.credit_button = button.Button(515, 450, self.credit_img, 1)
-        self.quit_button = button.Button(925, 100, self.quit_img, 1)
-        self.back_button = button.Button(515, 660, self.back_img, 1)
-        self.wlcm_button = button.Button(325, 100, self.wlcm_img, 1)
+        self.resume_button = button.Button(420, 300, self.start_img, 1)
+        self.credit_button = button.Button(420, 450, self.credit_img, 1)
+        self.quit_button = button.Button(725, 100, self.quit_img, 1)
+        self.back_button = button.Button(315, 660, self.back_img, 1)
+        self.wlcm_button = button.Button(125, 100, self.wlcm_img, 1)
 
     def draw_text(self, text, font, text_col, x, y):
         img = font.render(text, True, text_col)
@@ -68,9 +68,10 @@ class MainMenu:
 class GameApp:
     def __init__(self):
         pygame.init()
-        self._s_width = 960
-        self._s_height = 960
-        self.screen = pygame.display.set_mode((self._s_width , self._s_height))
+        # private variables
+        self.__s_width = 960
+        self.__s_height = 960
+        self.screen = pygame.display.set_mode((self.__s_width , self.__s_height))
         pygame.display.set_caption("Main Menu")
         self.menu = MainMenu(self.screen)
         self.game_paused = False
