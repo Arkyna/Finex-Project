@@ -10,11 +10,10 @@ from bin.towers.tower1 import FirstTower
 class Game:
     def __init__(self):
         pgm.init()
-        SIDE_PANEL = 200
-        SCREEN_WIDTH = 960
+        SCREEN_WIDTH = 1160
         SCREEN_HEIGHT = 960
         self.clock = pgm.time.Clock()
-        self.screen = pgm.display.set_mode((SCREEN_WIDTH + SIDE_PANEL, SCREEN_HEIGHT))
+        self.screen = pgm.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pgm.display.set_caption(val.GAME_NAME)
         self.load_assets()
         self.load_world()
