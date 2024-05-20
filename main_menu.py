@@ -6,26 +6,26 @@ from game import Game
 class MainMenu:
     def __init__(self, screen):
         self.screen = screen
-        self.title_font = pygame.font.Font(r"assets\font\MinecraftEvenings-lgvPd.ttf", 60)
-        self.font = pygame.font.Font(r"assets\font\MinecraftBold-nMK1.otf", 50)
-        self.small_font = pygame.font.Font(r"assets\font\MinecraftRegular-Bmg3.otf", 29)
+        self.title_font = pygame.font.Font(r"assets/font/MinecraftEvenings-lgvPd.ttf", 60)
+        self.font = pygame.font.Font(r"assets/font/MinecraftBold-nMK1.otf", 50)
+        self.small_font = pygame.font.Font(r"assets/font/MinecraftRegular-Bmg3.otf", 29)
         self.BLACK_TEXT_COL = (0, 0, 0)
         self.TEXT_COL = (0, 0, 0)
         self.load_images()
         self.create_buttons()
 
     def load_images(self):
-        self.start_img = pygame.image.load(r"assets\images\buttons\play_button.png").convert_alpha()
-        self.credit_img = pygame.image.load(r"assets\images\buttons\credit_button.png").convert_alpha()
-        self.quit_img = pygame.image.load(r"assets\images\buttons\quit_button.png").convert_alpha()
-        self.back_img = pygame.image.load(r'assets\images\buttons\back_button.png').convert_alpha()
-        self.day_img = pygame.image.load(r'assets\images\buttons\day_button.png').convert_alpha()
-        self.night_img = pygame.image.load(r'assets\images\buttons\night_button.png').convert_alpha()
-        self.credit_bg_img = pygame.image.load(r'assets\images\gui\creddit_background.png').convert_alpha()
-        self.background_img = pygame.image.load(r'assets\images\gui\background_main_menu.jpg').convert_alpha()
+        self.start_img = pygame.image.load('assets/images/buttons/play_button.png').convert_alpha()
+        self.credit_img = pygame.image.load('assets/images/buttons/credit_button.png').convert_alpha()
+        self.quit_img = pygame.image.load('assets/images/buttons/quit_button.png').convert_alpha()
+        self.back_img = pygame.image.load('assets/images/buttons/back_button.png').convert_alpha()
+        self.day_img = pygame.image.load('assets/images/buttons/day_button.png').convert_alpha()
+        self.night_img = pygame.image.load('assets/images/buttons/night_button.png').convert_alpha()
+        self.credit_bg_img = pygame.image.load('assets/images/gui/creddit_background.png').convert_alpha()
+        self.background_img = pygame.image.load('assets/images/gui/background_main_menu.jpg').convert_alpha()
 
     def create_buttons(self):
-        self.resume_button = button.Button(420, 300, self.start_img, 1)
+        self.begin_button = button.Button(420, 300, self.start_img, 1)
         self.credit_button = button.Button(420, 400, self.credit_img, 1)
         self.quit_button = button.Button(420, 500, self.quit_img, 1)
         self.back_button = button.Button(420, 660, self.back_img, 1)
@@ -38,8 +38,8 @@ class MainMenu:
 
     def draw_additional_text(self):
         self.draw_text("SENTINEL SIEGE", self.title_font, self.TEXT_COL, 230, 30)
-        self.draw_text("              a Tower Defense Game", self.small_font, self.TEXT_COL, 140, 80)
-        self.draw_text("      Selamat Datang di sentinel siege!!", self.small_font, self.TEXT_COL, 140, 800)
+        self.draw_text("a Tower Defense Game", self.small_font, self.TEXT_COL, 310, 80)
+        self.draw_text("Selamat Datang di sentinel siege!!", self.small_font, self.TEXT_COL, 250, 800)
         self.draw_text("Play untuk memulai permainan dan Quit untuk keluar ", self.small_font, self.TEXT_COL, 60, 830)
 
     def draw_credits(self):
@@ -71,7 +71,7 @@ class MainMenu:
         if menu_state == "main":
             self.draw_text("Main Menu", self.font, self.BLACK_TEXT_COL, 330, 200)
             self.draw_additional_text()
-            if self.resume_button.draw(self.screen):
+            if self.begin_button.draw(self.screen):
                 return "map_selection"
             if self.credit_button.draw(self.screen):
                 return "credit"
@@ -106,15 +106,11 @@ class GameApp:
                 self.menu_state = self.menu.draw(self.menu_state)
                 if self.menu_state in ["day", "night"]:
                     self.map_choice = self.menu_state
-                    self.menu_state = "resume"
-                elif self.menu_state == "resume":
                     self.game_paused = False
                     game_instance = Game(self.map_choice)
                     game_instance.run()
                 elif self.menu_state == "quit":
                     run = False
-            else:
-                self.menu.draw_text("Tekan SPACE untuk jeda", self.menu.font, self.menu.TEXT_COL, 345, 420)
 
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
