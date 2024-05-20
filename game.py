@@ -1,10 +1,10 @@
 import pygame as pgm
 import json
 from bin import globalvar as val
-from bin.monsters.monster_type import BasicMonster, FastMonster, BossMonster
+from bin.monsters.monsters_type import BasicMonster, FastMonster, BossMonster
 from bin.world import World
 from bin.button import Button
-from bin.towers.tower1 import DefaultTower
+from bin.towers.towers_type import DefaultTower, ElectricTower
 
 # The whole game initialization
 class Game:
@@ -28,7 +28,8 @@ class Game:
     # Load the images and assets
     def load_assets(self):
         self.map_image = pgm.image.load('assets/images/map/level1.png').convert_alpha()
-        self.tower_spritesheet = [pgm.image.load(f'assets/images/towers/weapon_heavy_arrow_{x}.png').convert_alpha() for x in range(1, val.TOWER_LEVELS + 1)]
+        self.basic_tower_spritesheet = [pgm.image.load(f'assets/images/towers/basic_tower_{x}.png').convert_alpha() for x in range(1, val.TOWER_LEVELS + 1)]
+        self.electric_tower_spritesheet = [pgm.image.load(f'assets/images/towers/electric_tower_{x}.png').convert_alpha() for x in range(1, val.TOWER_LEVELS + 1)]
         self.base_tower = pgm.image.load(r'assets/images/towers/ABC_tower.png').convert_alpha()
         self.cursor_tower = pgm.image.load(r'assets/images/towers/cursor_tower.png').convert_alpha()
         self.monster_images = {
@@ -40,6 +41,7 @@ class Game:
         self.buy_tower_image = pgm.image.load('assets/images/buttons/buy_button.png').convert_alpha()
         self.cancel_button_image = pgm.image.load('assets/images/buttons/cancel_button.png').convert_alpha()
         self.upgrade_button_image = pgm.image.load('assets/images/buttons/upgrade.png').convert_alpha()
+        self.change_button_image = pgm.image.load('assets/images/buttons/change_button.png').convert_alpha()
         self.begin_image = pgm.image.load('assets/images/buttons/begin.png').convert_alpha()
         self.restart_image = pgm.image.load('assets/images/buttons/restart.png').convert_alpha()
         self.fforward_image = pgm.image.load('assets/images/buttons/fast_forward.png').convert_alpha()
@@ -76,7 +78,8 @@ class Game:
     def create_buttons(self):
         self.tower_button = Button(990, 120, self.buy_tower_image, True)
         self.cancel_button = Button(990, 240, self.cancel_button_image, True)
-        self.upgrade_button = Button(990, 200, self.upgrade_button_image, True)
+        self.upgrade_button = Button(990, 180, self.upgrade_button_image, True)
+        self.change_button = Button(990, 240, self.change_button_image, True)
         self.begin_button = Button(990, 320, self.begin_image, True)
         self.restart_button = Button(990, 360, self.restart_image, True)
         self.fforward_button = Button(990, 400, self.fforward_image, False)
@@ -127,8 +130,9 @@ class Game:
         mouse_tile_num = (mouse_tile_y * val.COLS) + mouse_tile_x
         if self.world.tile_map[mouse_tile_num] == 74:
             if not any((mouse_tile_x, mouse_tile_y) == (tower.tile_x, tower.tile_y) for tower in self.tower_groups):
-                new_tower = DefaultTower(self.base_tower, self.tower_spritesheet, mouse_tile_x, mouse_tile_y)
-                self.tower_groups.add(new_tower)
+                # Tower types
+                default_tower = DefaultTower(self.base_tower, self.basic_tower_spritesheet, mouse_tile_x, mouse_tile_y)
+                self.tower_groups.add(default_tower)
                 self.world.money -= val.BUY_COST
     
     # select an existing tower
@@ -171,6 +175,7 @@ class Game:
                     self.world.reset_level()
                     self.world.process_enemies()
     
+    # draw monsters variants or types
     def create_monster(self, enemy_type, waypoints):
         if enemy_type == "weak":
             return BasicMonster("weak", waypoints, self.monster_images)
@@ -230,14 +235,28 @@ class Game:
                 self.screen.blit(self.cursor_tower, cursor_rect)
             if self.cancel_button.draw(self.screen):
                 self.placing_tower = False
-        if self.selected_tower and self.selected_tower.upgrade_level < val.TOWER_LEVELS:
+        if self.selected_tower:
+            if self.selected_tower.upgrade_level < val.TOWER_LEVELS:
             # upgrade button and logics
-            if self.upgrade_button.draw(self.screen):
-                if self.world.money >= val.UPGRADE_COST:
-                    self.selected_tower.upgrade()
-                    self.world.money -= val.UPGRADE_COST
+                if self.upgrade_button.draw(self.screen):
+                    if self.world.money >= val.UPGRADE_COST:
+                        self.selected_tower.upgrade()
+                        self.world.money -= val.UPGRADE_COST
+                if isinstance(self.selected_tower, DefaultTower):
+                    if self.change_button.draw(self.screen):
+                        if self.world.money >= 10:
+                            self.change_tower_element(self.selected_tower)
+                            self.world.money -= 10
         if self.level_started:
                 self.fforward_button.draw(self.screen)
+    
+    # changing the tower element into electric
+    def change_tower_element(self, tower):
+        electric_tower = ElectricTower(self.base_tower, self.electric_tower_spritesheet, tower.tile_x, tower.tile_y)
+        electric_tower.initialize_from_tower(tower)
+        self.tower_groups.remove(tower)
+        self.tower_groups.add(electric_tower)
+        self.selected_tower = electric_tower
 
     # draw the game over and victory messages on the screen
     def draw_game_over(self):
@@ -269,3 +288,13 @@ class Game:
 # uncomment the line below for running the game directly from this file
 if __name__ == "__main__":
     Game()
+
+''' 
+OOP that have been applied on this game:
+
+Classes and Objects can be found at this same file,
+Inheritance, Encapsulation and polymorphism can be found at monster_type.py,
+Abstraction can be found at tower.py and monster.py,
+another Encapsulation can be found at main_menu.py the screen variable is well encapsulated
+
+'''

@@ -9,7 +9,7 @@ SIDE_PANEL = 200
 SCREEN_WIDTH = 1160
 SCREEN_HEIGHT = 960
 FPS = 60
-HEALTH = 1
+HEALTH = 2
 MONEY = 1000
 LEVEL_COMPLETE_REWARD = 100
 TOTAL_LEVELS = 2
@@ -54,7 +54,7 @@ KILL_REWARD = 100
 ENEMY_SPAWN_DATA = [
   {
     #1
-    "weak": 1,
+    "weak": 15,
     "medium": 1,
     "strong": 1,
     "elite": 0
