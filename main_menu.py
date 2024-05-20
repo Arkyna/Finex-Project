@@ -5,8 +5,8 @@ from game import Game
 class MainMenu:
     def __init__(self, screen):
         self.screen = screen
-        self.font = pygame.font.Font(r"assets\font\MinecraftBold-nMK1.otf", 72)
-        self.small_font = pygame.font.Font(r"assets\font\MinecraftRegular-Bmg3.otf", 40)
+        self.font = pygame.font.Font(r"assets\font\MinecraftBold-nMK1.otf", 64)
+        self.small_font = pygame.font.Font(r"assets\font\MinecraftRegular-Bmg3.otf", 29)
         self.TEXT_COL = (0, 0, 0)
         self.BLACK_TEXT_COL = (0, 0, 0)
         self.load_images()
@@ -32,26 +32,26 @@ class MainMenu:
         self.screen.blit(img, (x, y))
 
     def draw_additional_text(self):
-        self.draw_text("Selamat Datang di sentinel siege!!", self.small_font, self.TEXT_COL, 100, 30)
-        self.draw_text("Pilih opsi di bawah untuk memulai atau keluar.", self.small_font, self.TEXT_COL, 100, 60)
+        self.draw_text("      Selamat Datang di sentinel siege!!", self.small_font, self.TEXT_COL, 140, 30)
+        self.draw_text("Pilih opsi di bawah untuk memulai atau keluar", self.small_font, self.TEXT_COL, 140, 60)
 
     def draw_credits(self):
         self.screen.blit(self.credit_bg_img, (51, 100))  # Adjust the position as needed
-        self.draw_text("Credits", self.font, self.BLACK_TEXT_COL, 390, 140)
-        self.draw_text("Game Developer: OkSobatKoding", self.small_font, self.TEXT_COL, 180, 200)
-        self.draw_text("Designer: OkSobatKoding", self.small_font, self.TEXT_COL, 180, 240)
-        self.draw_text("Special Thanks To", self.font, self.BLACK_TEXT_COL, 230, 280)
-        self.draw_text("Music: OpenGameArt", self.small_font, self.TEXT_COL, 180, 340)
-        self.draw_text("GUI Assets: KanekiZLF from Itch.io ", self.small_font, self.TEXT_COL, 180, 380)
-        self.draw_text("Monster Assets: foozlecc from Itch.io ", self.small_font, self.TEXT_COL, 180, 420)
-        self.draw_text("Tower Assets: foozlecc from Itch.io ", self.small_font, self.TEXT_COL, 180, 460)
-        self.draw_text("Map Assets: foozlecc from Itch.io ", self.small_font, self.TEXT_COL, 180, 500)
+        self.draw_text("Credits", self.font, self.BLACK_TEXT_COL, 300, 140)
+        self.draw_text("Game Developer : OkSobatKoding", self.small_font, self.TEXT_COL, 180, 200)
+        self.draw_text("Designer       : OkSobatKoding", self.small_font, self.TEXT_COL, 180, 240)
+        self.draw_text("Special Thanks To", self.font, self.BLACK_TEXT_COL, 200, 280)
+        self.draw_text("Music          : OpenGameArt", self.small_font, self.TEXT_COL, 180, 340)
+        self.draw_text("GUI Assets     : KanekiZLF from Itch.io ", self.small_font, self.TEXT_COL, 180, 380)
+        self.draw_text("Monster Assets : foozlecc from Itch.io ", self.small_font, self.TEXT_COL, 180, 420)
+        self.draw_text("Tower Assets   : foozlecc from Itch.io ", self.small_font, self.TEXT_COL, 180, 460)
+        self.draw_text("Map Assets     : foozlecc from Itch.io ", self.small_font, self.TEXT_COL, 180, 500)
 
     def draw(self, menu_state):
         self.screen.fill((52, 78, 91))
         if menu_state == "main":
             self.wlcm_button.draw(self.screen)
-            self.draw_text("Main Menu", self.font, self.BLACK_TEXT_COL, 328, 120)
+            self.draw_text("Main Menu", self.font, self.BLACK_TEXT_COL, 300, 120)
             self.draw_additional_text()
             if self.resume_button.draw(self.screen):
                 return "resume"

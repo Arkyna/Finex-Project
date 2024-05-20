@@ -276,11 +276,11 @@ class Game:
     # display the data of game such as healt, money, and current level
     def display_data(self):
         self.screen.blit(self.sidebar_image, (960, 0))
-        self.draw_text(str("Health : "), self.text_font, "grey100", 980, 20)
+        self.draw_text(str("Health  : "), self.text_font, "grey100", 980, 20)
         self.draw_text(str(self.world.health), self.text_font, "grey100", 1090, 20)
-        self.draw_text(str("Money  : "), self.text_font, "grey100", 980, 50)
+        self.draw_text(str("Money   : "), self.text_font, "grey100", 980, 50)
         self.draw_text(str(self.world.money), self.text_font, "grey100", 1090, 50)
-        self.draw_text(str("Level  : "), self.text_font, "grey100", 980, 80)
+        self.draw_text(str("Level   : "), self.text_font, "grey100", 980, 80)
         self.draw_text(str(self.world.level), self.text_font, "grey100", 1090, 80)
 
     # text drawing
