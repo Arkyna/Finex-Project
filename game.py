@@ -54,7 +54,13 @@ class Game:
         self.begin_image = pgm.image.load('assets/images/buttons/begin.png').convert_alpha()
         self.restart_image = pgm.image.load('assets/images/buttons/restart.png').convert_alpha()
         self.fforward_image = pgm.image.load('assets/images/buttons/fast_forward.png').convert_alpha()
-        self.sidebar_image = pgm.image.load('assets/images/gui/sidepanel.png').convert_alpha()
+
+        # side bar selection
+        if self.map_choice == 'day':
+            self.sidebar_image = pgm.image.load('assets/images/gui/sidepanel.png').convert_alpha()
+        else:
+            self.sidebar_image = pgm.image.load('assets\images\gui\side_nightversion.jpg').convert_alpha()
+
         self.flat_back_image = pgm.image.load('assets/images/gui/flatbg_480x192.png').convert_alpha()
         self.large_font = pgm.font.Font(r"assets\font\MinecraftBold-nMK1.otf", 36)
         self.text_font = pgm.font.Font(r"assets\font\MinecraftRegular-Bmg3.otf", 24)
