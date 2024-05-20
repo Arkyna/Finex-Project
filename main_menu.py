@@ -1,4 +1,4 @@
-import pygame
+import pygame as pgm
 from bin import button
 from game import Game
 
@@ -6,23 +6,27 @@ from game import Game
 class MainMenu:
     def __init__(self, screen):
         self.screen = screen
-        self.title_font = pygame.font.Font(r"assets/font/MinecraftEvenings-lgvPd.ttf", 60)
-        self.font = pygame.font.Font(r"assets/font/MinecraftBold-nMK1.otf", 50)
-        self.small_font = pygame.font.Font(r"assets/font/MinecraftRegular-Bmg3.otf", 29)
+        self.title_font = pgm.font.Font(r"assets/font/MinecraftEvenings-lgvPd.ttf", 60)
+        self.font = pgm.font.Font(r"assets/font/MinecraftBold-nMK1.otf", 50)
+        self.small_font = pgm.font.Font(r"assets/font/MinecraftRegular-Bmg3.otf", 29)
         self.BLACK_TEXT_COL = (0, 0, 0)
         self.TEXT_COL = (0, 0, 0)
         self.load_images()
         self.create_buttons()
 
+        #music
+        pgm.mixer.music.load(r"assets/audios/bgm2.mp3")
+        pgm.mixer.music.play(-1)
+
     def load_images(self):
-        self.start_img = pygame.image.load('assets/images/buttons/play_button.png').convert_alpha()
-        self.credit_img = pygame.image.load('assets/images/buttons/credit_button.png').convert_alpha()
-        self.quit_img = pygame.image.load('assets/images/buttons/quit_button.png').convert_alpha()
-        self.back_img = pygame.image.load('assets/images/buttons/back_button.png').convert_alpha()
-        self.day_img = pygame.image.load('assets/images/buttons/day_button.png').convert_alpha()
-        self.night_img = pygame.image.load('assets/images/buttons/night_button.png').convert_alpha()
-        self.credit_bg_img = pygame.image.load('assets/images/gui/creddit_background.png').convert_alpha()
-        self.background_img = pygame.image.load('assets/images/gui/background_main_menu.jpg').convert_alpha()
+        self.start_img = pgm.image.load('assets/images/buttons/play_button.png').convert_alpha()
+        self.credit_img = pgm.image.load('assets/images/buttons/credit_button.png').convert_alpha()
+        self.quit_img = pgm.image.load('assets/images/buttons/quit_button.png').convert_alpha()
+        self.back_img = pgm.image.load('assets/images/buttons/back_button.png').convert_alpha()
+        self.day_img = pgm.image.load('assets/images/buttons/day_button.png').convert_alpha()
+        self.night_img = pgm.image.load('assets/images/buttons/night_button.png').convert_alpha()
+        self.credit_bg_img = pgm.image.load('assets/images/gui/creddit_background.png').convert_alpha()
+        self.background_img = pgm.image.load('assets/images/gui/background_main_menu.jpg').convert_alpha()
 
     def create_buttons(self):
         self.begin_button = button.Button(420, 300, self.start_img, 1)
@@ -88,12 +92,12 @@ class MainMenu:
 
 class GameApp:
     def __init__(self):
-        pygame.init()
+        pgm.init()
         # encapsulated
         self.__s_width = 960
         self.__s_height = 960
-        self.screen = pygame.display.set_mode((self.__s_width, self.__s_height))
-        pygame.display.set_caption("Sentinel SIEGE!!!!! now in 4k")
+        self.screen = pgm.display.set_mode((self.__s_width, self.__s_height))
+        pgm.display.set_caption("Sentinel SIEGE!!!!! now in 4k")
         self.menu = MainMenu(self.screen)
         self.game_paused = True
         self.menu_state = "main"
@@ -113,15 +117,15 @@ class GameApp:
                 elif self.menu_state == "quit":
                     run = False
 
-            for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE:
+            for event in pgm.event.get():
+                if event.type == pgm.KEYDOWN:
+                    if event.key == pgm.K_SPACE:
                         self.game_paused = True
-                if event.type == pygame.QUIT:
+                if event.type == pgm.QUIT:
                     run = False
 
-            pygame.display.update()
-        pygame.quit()
+            pgm.display.update()
+        pgm.quit()
 
 if __name__ == "__main__":
     GameApp()

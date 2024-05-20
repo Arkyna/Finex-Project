@@ -25,6 +25,9 @@ class Game:
         # set up the initial game variables
         self.setup_game_variables()
         # calling or starting the main loop of the game 
+        #music
+        pgm.mixer.music.load(r"assets/audios/bgm.ogg")
+        pgm.mixer.music.play(-1)
     
     def start_game(self):
         self.run()
@@ -304,6 +307,8 @@ class Game:
     def draw_text(self, text, font, text_col, x, y):
         img = font.render(text, True, text_col)
         self.screen.blit(img, (x, y))
+    
+    
 
 # uncomment the line below for running the game directly from this file
 if __name__ == "__main__":
