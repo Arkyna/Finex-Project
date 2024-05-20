@@ -73,7 +73,11 @@ Dan silahkan menjalankan file initialize.py
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
 ### Screenshot Map
+#### Day
 ![App Screenshot](./assets/images/map/level1.png)
+
+#### Night
+![App Screenshot](./assets/images/map/map_1_night_vers.png)
 
 ### Screenshot Tower
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
