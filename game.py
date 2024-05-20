@@ -32,9 +32,9 @@ class Game:
     # Load the images and assets
     def load_assets(self):
         if self.map_choice == 'day':
-            self.map_image = pgm.image.load('assets\images\map\level1.png').convert_alpha()
+            self.map_image = pgm.image.load('assets/images/map/level1.png').convert_alpha()
         else:
-            self.map_image = pgm.image.load('assets\images\map\map_1_night_vers.png').convert_alpha()
+            self.map_image = pgm.image.load('assets/images/map/map_1_night_vers.png').convert_alpha()
 
         # self.map_image = pgm.image.load('assets/images/map/level1.png').convert_alpha()
         self.basic_tower_spritesheet = [pgm.image.load(f'assets/images/towers/basic_tower_{x}.png').convert_alpha() for x in range(1, val.TOWER_LEVELS + 1)]
@@ -59,7 +59,7 @@ class Game:
         if self.map_choice == 'day':
             self.sidebar_image = pgm.image.load('assets/images/gui/sidepanel.png').convert_alpha()
         else:
-            self.sidebar_image = pgm.image.load('assets\images\gui\side_nightversion.jpg').convert_alpha()
+            self.sidebar_image = pgm.image.load('assets/images/gui/side_nightversion.png').convert_alpha()
 
         self.flat_back_image = pgm.image.load('assets/images/gui/flatbg_480x192.png').convert_alpha()
         self.large_font = pgm.font.Font(r"assets\font\MinecraftBold-nMK1.otf", 36)
