@@ -67,7 +67,7 @@ Untuk Menjalankan project, install python ke dalam laptop atau computer anda dan
 Dan silahkan menjalankan file initialize.py
     
 ## UML Class Sentinel Siege
-![App Screenshot](./assets/images/UML_Game/assets/images/UML_Game/UMLMYLV.png.png)
+![App Screenshot](.assets\images\UML_Game\UMLMYLV.png)
 
 ## Screenshot Game 
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
