@@ -277,7 +277,7 @@ class Game:
 
     # draw the game over and victory messages on the screen
     def draw_game_over(self):
-        self.draw_text("GAME OVER" if self.game_outcome == -1 else "YOU WIN?", self.large_font, "grey0", 400, 400)
+        self.draw_text("GAME OVER" if self.game_outcome == -1 else "Keren", self.large_font, "grey0", 400, 400)
 
     # reset the game state
     def reset_game(self):

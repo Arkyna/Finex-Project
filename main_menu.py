@@ -93,7 +93,7 @@ class GameApp:
         self.__s_width = 960
         self.__s_height = 960
         self.screen = pygame.display.set_mode((self.__s_width, self.__s_height))
-        pygame.display.set_caption("Main Menu")
+        pygame.display.set_caption("Sentinel SIEGE!!!!! now in 4k")
         self.menu = MainMenu(self.screen)
         self.game_paused = True
         self.menu_state = "main"
