@@ -5,7 +5,8 @@ from game import Game
 class MainMenu:
     def __init__(self, screen):
         self.screen = screen
-        self.font = pygame.font.Font(r"assets\\font\\MinecraftBold-nMK1.otf", 64)
+        self.title_font = pygame.font.Font(r"assets\font\MinecraftEvenings-lgvPd.ttf", 60)
+        self.font = pygame.font.Font(r"assets\\font\\MinecraftBold-nMK1.otf", 50)
         self.small_font = pygame.font.Font(r"assets\\font\\MinecraftRegular-Bmg3.otf", 29)
         self.BLACK_TEXT_COL = (0, 0, 0)
         self.TEXT_COL = (0, 0, 0)  # Tambahkan atribut TEXT_COL
@@ -13,28 +14,30 @@ class MainMenu:
         self.create_buttons()
 
     def load_images(self):
-        self.start_img = pygame.image.load("assets/images/buttons/begin.png").convert_alpha()
-        self.credit_img = pygame.image.load("assets/images/buttons/begin.png").convert_alpha()
-        self.quit_img = pygame.image.load("assets/images/main_menu/close_button.png").convert_alpha()
-        self.back_img = pygame.image.load('assets/images/buttons/cancel_button.png').convert_alpha()
-        self.wlcm_img = pygame.image.load('assets/images/main_menu/IRONY_TITLE_Large.png').convert_alpha()
-        self.credit_bg_img = pygame.image.load('assets/images/main_menu/UI_board_Large_parchment.png').convert_alpha()
-        self.background_img = pygame.image.load(r'assets\\images\\main_menu\\background_main_menu.jpg').convert_alpha()
+        self.start_img = pygame.image.load(r"assets\images\buttons\play_button.png").convert_alpha()
+        self.credit_img = pygame.image.load(r"assets\images\buttons\credit_button.png").convert_alpha()
+        self.quit_img = pygame.image.load(r"assets\images\buttons\quit_button.png").convert_alpha()
+        self.back_img = pygame.image.load(r'assets\images\buttons\back_button.png').convert_alpha()
+        self.credit_bg_img = pygame.image.load(r'assets\images\gui\creddit_background.png').convert_alpha()
+        self.background_img = pygame.image.load(r'assets\images\gui\background_main_menu.jpg').convert_alpha()
 
     def create_buttons(self):
         self.resume_button = button.Button(420, 300, self.start_img, 1)
-        self.credit_button = button.Button(420, 450, self.credit_img, 1)
-        self.quit_button = button.Button(840, 100, self.quit_img, 1)
+        self.credit_button = button.Button(420, 400, self.credit_img, 1)
+        self.quit_button = button.Button(420, 500, self.quit_img, 1)
         self.back_button = button.Button(420, 660, self.back_img, 1)
-        self.wlcm_button = button.Button(220, 100, self.wlcm_img, 1)
 
     def draw_text(self, text, font, text_col, x, y):
         img = font.render(text, True, text_col)
         self.screen.blit(img, (x, y))
 
     def draw_additional_text(self):
-        self.draw_text("      Selamat Datang di sentinel siege!!", self.small_font, self.TEXT_COL, 140, 30)
-        self.draw_text("Pilih opsi di bawah untuk memulai atau keluar", self.small_font, self.TEXT_COL, 140, 60)
+        self.draw_text("SENTINEL SIEGE", self.title_font, self.TEXT_COL, 230, 30)
+        self.draw_text("              a Tower Defense Game", self.small_font, self.TEXT_COL, 140, 80)
+
+
+        self.draw_text("      Selamat Datang di sentinel siege!!", self.small_font, self.TEXT_COL, 140, 800)
+        self.draw_text("Play untuk memulai permainan dan Quit untuk keluar ", self.small_font, self.TEXT_COL, 60, 830)
 
     def draw_credits(self):
         self.screen.blit(self.credit_bg_img, (51, 100))  # Adjust the position as needed
@@ -54,8 +57,7 @@ class MainMenu:
         self.screen.blit(self.background_img, (0, 0))
         
         if menu_state == "main":
-            self.wlcm_button.draw(self.screen)
-            self.draw_text("Main Menu", self.font, self.BLACK_TEXT_COL, 300, 120)
+            self.draw_text("Main Menu", self.font, self.BLACK_TEXT_COL, 330, 200)
             self.draw_additional_text()
             if self.resume_button.draw(self.screen):
                 return "resume"
