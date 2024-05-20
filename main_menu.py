@@ -5,10 +5,10 @@ from game import Game
 class MainMenu:
     def __init__(self, screen):
         self.screen = screen
-        self.font = pygame.font.Font(r"assets\font\MinecraftBold-nMK1.otf", 64)
-        self.small_font = pygame.font.Font(r"assets\font\MinecraftRegular-Bmg3.otf", 29)
-        self.TEXT_COL = (0, 0, 0)
+        self.font = pygame.font.Font(r"assets\\font\\MinecraftBold-nMK1.otf", 64)
+        self.small_font = pygame.font.Font(r"assets\\font\\MinecraftRegular-Bmg3.otf", 29)
         self.BLACK_TEXT_COL = (0, 0, 0)
+        self.TEXT_COL = (0, 0, 0)  # Tambahkan atribut TEXT_COL
         self.load_images()
         self.create_buttons()
 
@@ -19,7 +19,7 @@ class MainMenu:
         self.back_img = pygame.image.load('assets/images/buttons/cancel_button.png').convert_alpha()
         self.wlcm_img = pygame.image.load('assets/images/main_menu/IRONY_TITLE_Large.png').convert_alpha()
         self.credit_bg_img = pygame.image.load('assets/images/main_menu/UI_board_Large_parchment.png').convert_alpha()
-        self.background_img = pygame.image.load('assets/images/main_menu/background_menu.jpg').convert_alpha()
+        self.background_img = pygame.image.load(r'assets\\images\\main_menu\\background_main_menu.jpg').convert_alpha()
 
     def create_buttons(self):
         self.resume_button = button.Button(420, 300, self.start_img, 1)
