@@ -1,47 +1,68 @@
 import unittest
 from unittest.mock import patch, MagicMock
 import pygame as pgm
-import sys
-import os
+from game import Game
+from bin import globalvar as val
 
-# Ensure the root directory is in the sys.path for imports to work correctly
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-from game import Game  # Import the Game class from game.py
-from bin import globalvar as val  # Import the global variables
-
-class TestGameInitialization(unittest.TestCase):
-    @patch('game.pgm.image.load')
-    def test_load_assets(self, mock_load):
-        # Create a fake surface to be returned by the mock
-        mock_load.return_value = MagicMock(spec=pgm.Surface)
+class TestGame(unittest.TestCase):
+    
+    def setUp(self):
+        self.game = Game()
+    
+    def test_clear_selection(self):
+        tower = MagicMock()
+        tower.selected = True
+        self.game.tower_groups.add(tower)
         
-        game = Game()
-        game.load_assets()
+        self.game.clear_selection()
+        
+        for tower in self.game.tower_groups:
+            self.assertFalse(tower.selected)
 
-        # Check if image.load was called with the correct file paths
-        mock_load.assert_any_call('assets/images/map/level1.png')
-        mock_load.assert_any_call('assets/images/towers/basic_tower_1.png')
-        mock_load.assert_any_call('assets/images/towers/electric_tower_1.png')
-        # Add more assertions for other images as needed
+    def test_select_tower(self):
+        tower = MagicMock()
+        tower.tile_x = 2
+        tower.tile_y = 2
+        self.game.tower_groups.add(tower)
 
-        # Check if the loaded images are assigned to the correct attributes
-        self.assertIsNotNone(game.map_image)
-        self.assertEqual(len(game.basic_tower_spritesheet), val.TOWER_LEVELS)
-        self.assertEqual(len(game.electric_tower_spritesheet), val.TOWER_LEVELS)
+        selected = self.game.select_tower((64, 64))  # 64/32 = 2, so (64, 64) maps to (2, 2)
+        self.assertEqual(selected, tower)
 
-    def test_initial_game_variables(self):
-        game = Game()
-        game.setup_game_variables()
+    def test_create_buttons(self):
+        self.game.create_buttons()
+        self.assertIsNotNone(self.game.tower_button)
+        self.assertIsNotNone(self.game.cancel_button)
+        self.assertIsNotNone(self.game.upgrade_button)
+        self.assertIsNotNone(self.game.change_button)
+        self.assertIsNotNone(self.game.begin_button)
+        self.assertIsNotNone(self.game.restart_button)
+        self.assertIsNotNone(self.game.fforward_button)
+    
+    @patch('pygame.time.get_ticks')
+    def test_check_game_outcome(self, mock_get_ticks):
+        self.game.world.health = 0
+        self.game.check_game_outcome()
+        self.assertTrue(self.game.game_over)
+        self.assertEqual(self.game.game_outcome, -1)
+        
+        self.game.world.health = 10
+        self.game.world.level = val.TOTAL_LEVELS + 1
+        self.game.check_game_outcome()
+        self.assertTrue(self.game.game_over)
+        self.assertEqual(self.game.game_outcome, 1)
 
-        self.assertFalse(game.game_over)
-        self.assertEqual(game.game_outcome, 0)
-        self.assertFalse(game.level_started)
-        self.assertIsInstance(game.last_enemy_spawn, int)
-        self.assertFalse(game.placing_tower)
-        self.assertIsNone(game.selected_tower)
-        self.assertIsInstance(game.monster_groups, pgm.sprite.Group)
-        self.assertIsInstance(game.tower_groups, pgm.sprite.Group)
+    @patch('pygame.time.get_ticks')
+    def test_reset_game(self, mock_get_ticks):
+        mock_get_ticks.return_value = 1000
+        self.game.reset_game()
+        self.assertFalse(self.game.game_over)
+        self.assertFalse(self.game.level_started)
+        self.assertFalse(self.game.placing_tower)
+        self.assertIsNone(self.game.selected_tower)
+        self.assertEqual(self.game.last_enemy_spawn, 1000)
+        self.assertEqual(len(self.game.monster_groups), 0)
+        self.assertEqual(len(self.game.tower_groups), 0)
+        self.assertIsNotNone(self.game.world)
 
 if __name__ == '__main__':
     unittest.main()
