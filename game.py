@@ -8,9 +8,11 @@ from bin.towers.towers_type import DefaultTower, ElectricTower
 
 # The whole game initialization
 class Game:
-    def __init__(self):
+    def __init__(self, map_choice):
         # initialize them pygame modules
         pgm.init()
+        # store the map choice
+        self.map_choice = map_choice
         # create a clock for the frame rate and time management
         self.clock = pgm.time.Clock()
         # set the game window title
@@ -27,7 +29,12 @@ class Game:
 
     # Load the images and assets
     def load_assets(self):
-        self.map_image = pgm.image.load('assets/images/map/level1.png').convert_alpha()
+        if self.map_choice == 'day':
+            self.map_image = pgm.image.load('assets\images\map\level1.png').convert_alpha()
+        else:
+            self.map_image = pgm.image.load('assets\images\map\map_1_night_vers.png').convert_alpha()
+
+        # self.map_image = pgm.image.load('assets/images/map/level1.png').convert_alpha()
         self.basic_tower_spritesheet = [pgm.image.load(f'assets/images/towers/basic_tower_{x}.png').convert_alpha() for x in range(1, val.TOWER_LEVELS + 1)]
         self.electric_tower_spritesheet = [pgm.image.load(f'assets/images/towers/electric_tower_{x}.png').convert_alpha() for x in range(1, val.TOWER_LEVELS + 1)]
         self.base_tower = pgm.image.load(r'assets/images/towers/ABC_tower.png').convert_alpha()
@@ -290,7 +297,7 @@ class Game:
 
 # uncomment the line below for running the game directly from this file
 if __name__ == "__main__":
-    Game()
+    Game("Malam")
 
 ''' 
 OOP that have been applied on this game:
