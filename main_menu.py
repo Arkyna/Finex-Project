@@ -5,8 +5,8 @@ from game import Game
 class MainMenu:
     def __init__(self, screen):
         self.screen = screen
-        self.font = pygame.font.Font("assets/font/buddychampion.ttf", 72)
-        self.small_font = pygame.font.Font("assets/font/buddychampionital.ttf", 40)
+        self.font = pygame.font.Font(r"assets\font\MinecraftBold-nMK1.otf", 72)
+        self.small_font = pygame.font.Font(r"assets\font\MinecraftRegular-Bmg3.otf", 40)
         self.TEXT_COL = (0, 0, 0)
         self.BLACK_TEXT_COL = (0, 0, 0)
         self.load_images()

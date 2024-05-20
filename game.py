@@ -47,8 +47,8 @@ class Game:
         self.fforward_image = pgm.image.load('assets/images/buttons/fast_forward.png').convert_alpha()
         self.sidebar_image = pgm.image.load('assets/images/gui/sidepanel.png').convert_alpha()
         self.flat_back_image = pgm.image.load('assets/images/gui/flatbg_480x192.png').convert_alpha()
-        self.text_font = pgm.font.SysFont("Consolas", 24, bold=True)
-        self.large_font = pgm.font.SysFont("Consolas", 36)
+        self.large_font = pgm.font.Font(r"assets\font\MinecraftBold-nMK1.otf", 36)
+        self.text_font = pgm.font.Font(r"assets\font\MinecraftRegular-Bmg3.otf", 24)
 
     # loading the world 
     def load_world(self):
@@ -276,9 +276,12 @@ class Game:
     # display the data of game such as healt, money, and current level
     def display_data(self):
         self.screen.blit(self.sidebar_image, (960, 0))
-        self.draw_text(str(self.world.health), self.text_font, "grey100", 980, 20)
-        self.draw_text(str(self.world.money), self.text_font, "grey100", 980, 50)
-        self.draw_text(str(self.world.level), self.text_font, "grey100", 980, 80)
+        self.draw_text(str("Health : "), self.text_font, "grey100", 980, 20)
+        self.draw_text(str(self.world.health), self.text_font, "grey100", 1090, 20)
+        self.draw_text(str("Money  : "), self.text_font, "grey100", 980, 50)
+        self.draw_text(str(self.world.money), self.text_font, "grey100", 1090, 50)
+        self.draw_text(str("Level  : "), self.text_font, "grey100", 980, 80)
+        self.draw_text(str(self.world.level), self.text_font, "grey100", 1090, 80)
 
     # text drawing
     def draw_text(self, text, font, text_col, x, y):
