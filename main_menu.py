@@ -19,6 +19,7 @@ class MainMenu:
         self.back_img = pygame.image.load('assets/images/buttons/cancel_button.png').convert_alpha()
         self.wlcm_img = pygame.image.load('assets/images/main_menu/IRONY_TITLE_Large.png').convert_alpha()
         self.credit_bg_img = pygame.image.load('assets/images/main_menu/UI_board_Large_parchment.png').convert_alpha()
+        self.background_img = pygame.image.load('assets/images/main_menu/background_menu.jpg').convert_alpha()
 
     def create_buttons(self):
         self.resume_button = button.Button(420, 300, self.start_img, 1)
@@ -49,6 +50,9 @@ class MainMenu:
 
     def draw(self, menu_state):
         self.screen.fill((52, 78, 91))
+        # Draw the background image
+        self.screen.blit(self.background_img, (0, 0))
+        
         if menu_state == "main":
             self.wlcm_button.draw(self.screen)
             self.draw_text("Main Menu", self.font, self.BLACK_TEXT_COL, 300, 120)
@@ -64,6 +68,7 @@ class MainMenu:
             if self.back_button.draw(self.screen):
                 return "main"
         return menu_state
+
 class GameApp:
     def __init__(self):
         pygame.init()
