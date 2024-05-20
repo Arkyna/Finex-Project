@@ -23,9 +23,9 @@ class MainMenu:
     def create_buttons(self):
         self.resume_button = button.Button(420, 300, self.start_img, 1)
         self.credit_button = button.Button(420, 450, self.credit_img, 1)
-        self.quit_button = button.Button(725, 100, self.quit_img, 1)
-        self.back_button = button.Button(315, 660, self.back_img, 1)
-        self.wlcm_button = button.Button(125, 100, self.wlcm_img, 1)
+        self.quit_button = button.Button(840, 100, self.quit_img, 1)
+        self.back_button = button.Button(420, 660, self.back_img, 1)
+        self.wlcm_button = button.Button(220, 100, self.wlcm_img, 1)
 
     def draw_text(self, text, font, text_col, x, y):
         img = font.render(text, True, text_col)
@@ -36,11 +36,11 @@ class MainMenu:
         self.draw_text("Pilih opsi di bawah untuk memulai atau keluar.", self.small_font, self.TEXT_COL, 100, 60)
 
     def draw_credits(self):
-        self.screen.blit(self.credit_bg_img, (150, 100))  # Adjust the position as needed
-        self.draw_text("Credits", self.font, self.BLACK_TEXT_COL, 490, 140)
+        self.screen.blit(self.credit_bg_img, (51, 100))  # Adjust the position as needed
+        self.draw_text("Credits", self.font, self.BLACK_TEXT_COL, 390, 140)
         self.draw_text("Game Developer: OkSobatKoding", self.small_font, self.TEXT_COL, 180, 200)
         self.draw_text("Designer: OkSobatKoding", self.small_font, self.TEXT_COL, 180, 240)
-        self.draw_text("Special Thanks To", self.font, self.BLACK_TEXT_COL, 330, 280)
+        self.draw_text("Special Thanks To", self.font, self.BLACK_TEXT_COL, 230, 280)
         self.draw_text("Music: OpenGameArt", self.small_font, self.TEXT_COL, 180, 340)
         self.draw_text("GUI Assets: KanekiZLF from Itch.io ", self.small_font, self.TEXT_COL, 180, 380)
         self.draw_text("Monster Assets: foozlecc from Itch.io ", self.small_font, self.TEXT_COL, 180, 420)
@@ -51,7 +51,7 @@ class MainMenu:
         self.screen.fill((52, 78, 91))
         if menu_state == "main":
             self.wlcm_button.draw(self.screen)
-            self.draw_text("Main Menu", self.font, self.BLACK_TEXT_COL, 430, 120)
+            self.draw_text("Main Menu", self.font, self.BLACK_TEXT_COL, 328, 120)
             self.draw_additional_text()
             if self.resume_button.draw(self.screen):
                 return "resume"
