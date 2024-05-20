@@ -25,6 +25,8 @@ class Game:
         # set up the initial game variables
         self.setup_game_variables()
         # calling or starting the main loop of the game 
+    
+    def start_game(self):
         self.run()
 
     # Load the images and assets
