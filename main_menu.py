@@ -89,6 +89,7 @@ class MainMenu:
 class GameApp:
     def __init__(self):
         pygame.init()
+        # encapsulated
         self.__s_width = 960
         self.__s_height = 960
         self.screen = pygame.display.set_mode((self.__s_width, self.__s_height))
