@@ -1,5 +1,6 @@
 
 # Sentinel Siege
+Sentinel siege adalah permainan tower defense yang termasuk dalam kategori game strategi yang bertujuan untuk membangun tower untuk mengalahkan monster yang berusaha menembus masuk base utama.Tugas kita adalah membangun barisan pertahanan yang tak tergoyahkan. Perkuat menara-menara tangguh, pilih strategi yang cerdas, dan hentikan para monster sebelum mereka menghancurkan base.
 Sentinel Siege adalah permainan Tower Defense Game yang memiliki tema Medieval
 
 
