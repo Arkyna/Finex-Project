@@ -86,4 +86,5 @@ Dan silahkan menjalankan file main_menu.py
 | Afif Malik Azhar | 120140117 | Programmer |
 
 ## Reference
--
+Game : Tower Defense King
+![App Screenshot](./assets/images/gui/referensi.jepg)
