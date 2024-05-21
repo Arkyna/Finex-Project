@@ -1,6 +1,4 @@
-'''
-
-NOT YET IMPLEMENTED
+# NOT YET IMPLEMENTED nor Valid
 
 import unittest
 import pygame
@@ -25,4 +23,3 @@ if __name__ == "__main__":
     unittest.main()
 
     
-'''

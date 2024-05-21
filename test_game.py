@@ -1,6 +1,4 @@
-'''
-
-NOT YET IMPLEMENTED
+# NOT YET IMPLEMENTED nor Valid
 
 import unittest
 from unittest.mock import patch, MagicMock
@@ -82,4 +80,3 @@ class TestGame(unittest.TestCase):
     
     def test_handle_mouse_click(self):
         self.game.placing_tower
-'''
