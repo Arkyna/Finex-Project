@@ -112,5 +112,4 @@ Dan silahkan menjalankan file main_menu.py
 | Afif Malik Azhar | 120140117 | Programmer |
 
 ## Reference
-
-Youtube tutorial on how to create tower defense game on pygame
+-
