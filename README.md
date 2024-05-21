@@ -87,4 +87,4 @@ Dan silahkan menjalankan file main_menu.py
 
 ## Reference
 Game : Tower Defense King
-![App Screenshot](./assets/images/gui/referensi.jpeg)
+![App Screenshot](./assets/images/gui/referensi.png)
