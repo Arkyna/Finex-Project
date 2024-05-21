@@ -29,9 +29,9 @@ Sentinel Siege adalah permainan Tower Defense Game yang memiliki tema Medieval
 
 - Ketika monster sudah mencapai base, maka HP base akan berkurang
 
-- ketika sudah mencapai waktu tertentu, boss monster akan datang untuk menyerang base
+- Ada beberapa jenis monster yang dispawn
 
-- ketika boss dikalahkan maka permainan berakhir dan game selesai
+- ketika semua monster dikalahkan maka permainan berakhir dan game selesai
 
 - Jika HP base sudah mencapai 0 maka permainan berakhir dan pemain kalah
 
@@ -43,6 +43,8 @@ Sentinel Siege adalah permainan Tower Defense Game yang memiliki tema Medieval
   Python v3.8.X
   Pygames v2.5.2
   math lib
+  random module
+  json importer module
 ```
 
 
@@ -64,7 +66,7 @@ Untuk Menjalankan project, install python ke dalam laptop atau computer anda dan
   sudo apt-get install python3-pygame
 ```
 
-Dan silahkan menjalankan file initialize.py
+Dan silahkan menjalankan file main_menu.py
     
 ## UML Class Sentinel Siege
 ![App Screenshot](./assets/images/UML_Game/UMLMYLV.png)
@@ -111,3 +113,4 @@ Dan silahkan menjalankan file initialize.py
 
 ## Reference
 
+Youtube tutorial on how to create tower defense game on pygame
