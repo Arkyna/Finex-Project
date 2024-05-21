@@ -1,5 +1,6 @@
 
 # Sentinel Siege
+Sentinel siege adalah permainan tower defense yang termasuk dalam kategori game strategi yang bertujuan untuk membangun tower untuk mengalahkan monster yang berusaha menembus masuk base utama.Tugas kita adalah membangun barisan pertahanan yang tak tergoyahkan. Perkuat menara-menara tangguh, pilih strategi yang cerdas, dan hentikan para monster sebelum mereka menghancurkan base.
 Sentinel Siege adalah permainan Tower Defense Game yang memiliki tema Medieval
 
 
@@ -42,9 +43,6 @@ Sentinel Siege adalah permainan Tower Defense Game yang memiliki tema Medieval
 ```bash
   Python v3.8.X
   Pygames v2.5.2
-  math lib
-  random module
-  json importer module
 ```
 
 
@@ -72,34 +70,10 @@ Dan silahkan menjalankan file main_menu.py
 ![App Screenshot](./assets/images/UML_Game/UMLMYLV.png)
 
 ## Screenshot Game 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-### Screenshot Map
-#### Day
-![App Screenshot](./assets/images/map/level1.png)
-
-#### Night
-![App Screenshot](./assets/images/map/map_1_night_vers.png)
-
-### Screenshot Tower
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-### Screenshot Monster
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-
-
-
+![App Screenshot](./assets/images/gui/GamePlay%20(4).png)
 
 
 ## Contributors
-
 
 
 | Nama |  NIM     | Kontribusi                |
@@ -112,5 +86,5 @@ Dan silahkan menjalankan file main_menu.py
 | Afif Malik Azhar | 120140117 | Programmer |
 
 ## Reference
-
-Youtube tutorial on how to create tower defense game on pygame
+Game : Tower Defense King
+![App Screenshot](./assets/images/gui/referensi.png)
