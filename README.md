@@ -43,9 +43,6 @@ Sentinel Siege adalah permainan Tower Defense Game yang memiliki tema Medieval
 ```bash
   Python v3.8.X
   Pygames v2.5.2
-  math lib
-  random module
-  json importer module
 ```
 
 
@@ -73,32 +70,10 @@ Dan silahkan menjalankan file main_menu.py
 ![App Screenshot](./assets/images/UML_Game/UMLMYLV.png)
 
 ## Screenshot Game 
-![App Screenshot](./assets/images/gui/GamePlay%20(1).png)
-![App Screenshot](./assets/images/gui/GamePlay%20(2).png)
-![App Screenshot](./assets/images/gui/GamePlay%20(3).png)
 ![App Screenshot](./assets/images/gui/GamePlay%20(4).png)
 
 
-### Screenshot Map
-#### Day
-![App Screenshot](./assets/images/map/level1.png)
-
-#### Night
-![App Screenshot](./assets/images/map/map_1_night_vers.png)
-
-### Screenshot Tower
-![App Screenshot](./assets/images/towers/Tower_Sreenshoot%20(1).png)
-![App Screenshot](./assets/images/towers/Tower_Sreenshoot%20(2).png)
-
-### Screenshot Monster
-![App Screenshot](./assets/images/monsters/enemy1.png)
-![App Screenshot](./assets/images/monsters/enemy2.png)
-![App Screenshot](./assets/images/monsters/enemy3.png)
-
-
-
 ## Contributors
-
 
 
 | Nama |  NIM     | Kontribusi                |
