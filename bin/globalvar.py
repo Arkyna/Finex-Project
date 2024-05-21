@@ -53,7 +53,7 @@ KILL_REWARD = 100
 ENEMY_SPAWN_DATA = [
   {
     #1
-    "weak": 5,
+	  "weak": 5,
     "medium": 1,
     "strong": 0,
     "elite": 0
@@ -168,8 +168,8 @@ ENEMY_DATA = {
     "speed": 2
   },
     "strong": {
-    "health": 20,
-    "speed": 3
+    "health": 30,
+    "speed": 2
   },
     "elite": {
     "health": 30,

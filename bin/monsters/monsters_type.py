@@ -60,7 +60,7 @@ class FastMonster(Monster):
         super().__init__(enemy_type, waypoints, images)
         self.stunned = False
         self.stun_end_time = 0
-        self.speed *= 2  # FastMonster walk faster
+        self.speed *= 1.3  # FastMonster walk faster
         
 
     def move(self, world):
@@ -113,7 +113,7 @@ class BossMonster(Monster):
         super().__init__(enemy_type, waypoints, images)
         self.stunned = False
         self.stun_end_time = 0
-        self.speed -= 2  # BossMonster walk slower
+        self.speed -= 1.2  # BossMonster walk slower
         self.health *= 3 # BossMonster got bigger health points
 
     def move(self, world):
