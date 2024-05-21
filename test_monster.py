@@ -2,8 +2,6 @@ import unittest
 from unittest.mock import Mock, patch
 import pygame as pgm
 from pygame.math import Vector2
-
-# Importing the Monster class from the correct module path
 from bin.monsters.monster import Monster
 
 # Mock the global variables and constants

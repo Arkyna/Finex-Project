@@ -33,12 +33,12 @@ TOWER_DATA = [
     {
         #2
         "range": 150,
-        "cooldown": 1500,
+        "cooldown": 1350,
     },
     {
         #3
         "range": 200,
-        "cooldown": 1000,
+        "cooldown": 800,
     }
 ]
 

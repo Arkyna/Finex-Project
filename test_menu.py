@@ -1,4 +1,4 @@
-# NOT YET IMPLEMENTED nor Valid
+# experimental
 
 import unittest
 import pygame

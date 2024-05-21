@@ -1,9 +1,9 @@
-# NOT YET IMPLEMENTED nor Valid
+# experimental
 
 import unittest
 from unittest.mock import patch, MagicMock
 import pygame as pgm
-from game import Game  # Adjust this import to match the location of Game class
+from game import Game 
 from bin import globalvar as val
 from bin.world import World
 

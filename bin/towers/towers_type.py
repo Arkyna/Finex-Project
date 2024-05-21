@@ -62,7 +62,7 @@ class DefaultTower(Tower):
 
 class ElectricTower(Tower):
     def load_images(self, sprite_sheet) -> List[Any]:
-        self.stun_duration = 500  # Duration in milliseconds
+        self.stun_duration = 850  # Duration in milliseconds
         size = sprite_sheet.get_height()
         animation_frames = []
         for x in range(16):

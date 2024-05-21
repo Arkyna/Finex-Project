@@ -18,7 +18,6 @@ class MockSurface:
 
 import bin.globalvar as val
 
-# The World class to be tested
 class World():
     def __init__(self, data, map_image):
         self.level = 1
