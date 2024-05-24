@@ -85,6 +85,9 @@ Dan silahkan menjalankan file main_menu.py
 | Dyo Dwi Carol Bukit | 122140145  | Programmer |
 | Afif Malik Azhar | 120140117 | Programmer |
 
+## Link Youtube
+https://youtu.be/j6redU5v1DU?si=FTqjSmO5DYuPvwqA
+
 ## Reference
 Game : Tower Defense King
 ![App Screenshot](./assets/images/gui/referensi.png)
